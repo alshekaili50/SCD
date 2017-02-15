@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:text="View all criminals"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/button3"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="Add criminal"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/button2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Search for criminal"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/button4"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/button3"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

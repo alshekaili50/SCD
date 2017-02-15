@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="type_of_crimes">
+        <item></item>
+        <item>Aiding/Abetting/Accessory</item>
+        <item>Assault/Battery</item>
+        <item>Drug Possession
+</item>
+        <item>Theft/Larceny</item>
+        <item>Other</item>
+    </string-array>
+
+</resources>
+
+
+
