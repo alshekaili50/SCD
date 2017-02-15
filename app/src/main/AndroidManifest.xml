@@ -21,7 +21,7 @@
         android:label="Police department"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.journaldev.Police_app.login">
+        <activity android:name="com.IEEE.SCD.login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,7 +33,7 @@
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
         <activity
-            android:name="com.journaldev.Police_app.options"
+            android:name="com.IEEE.SCD.options"
             android:label="@string/title_activity_options"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--
@@ -41,7 +41,7 @@
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
         <activity
-            android:name="com.journaldev.Police_app.add_case"
+            android:name="com.IEEE.SCD.add_case"
             android:label="@string/title_activity_options"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -49,11 +49,11 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name="com.journaldev.Police_app.Add_criminal" />
+        <activity android:name="com.IEEE.SCD.Add_criminal" />
 
-        <activity android:name="com.journaldev.Police_app.Update_Case" />
-        <activity android:name="com.journaldev.Police_app.manage_criminals" />
-        <activity android:name="com.journaldev.Police_app.update_criminal" />
+        <activity android:name="com.IEEE.SCD.Update_Case" />
+        <activity android:name="com.IEEE.SCD.manage_criminals" />
+        <activity android:name="com.IEEE.SCD.update_criminal" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -66,7 +66,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAP8xj_eglnn--_dA43TF0-5ty-2miT9lQ" />
 
-        <activity android:name="com.journaldev.Police_app.manage_cases"></activity>
+        <activity android:name="com.IEEE.SCD.manage_cases"></activity>
     </application>
 
 </manifest>
