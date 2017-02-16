@@ -82,6 +82,21 @@
                 android:layout_marginTop="5dip"
                 android:hint="dd/mm/YYYY"
                 android:inputType="text" />
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#372c24"
+                android:text="Personal photo *"/>
+            <Button
+                android:id="@+id/take_photo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Take photo"/>
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+
             <!-- Register Button -->
             <Button android:id="@+id/add_criminal"
                 android:layout_width="fill_parent"

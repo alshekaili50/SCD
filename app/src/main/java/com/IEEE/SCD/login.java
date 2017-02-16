@@ -127,7 +127,7 @@ public class login extends AppCompatActivity{
 
                         }
                     }else{
-                            Toast.makeText(login.this,"Could not reterieve information from server",Toast.LENGTH_LONG).show();
+                            Toast.makeText(login.this,"Could not retrieve information from server",Toast.LENGTH_LONG).show();
 
                         }
                     }

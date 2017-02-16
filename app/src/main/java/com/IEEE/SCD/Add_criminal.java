@@ -2,6 +2,9 @@ package com.IEEE.SCD;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,8 +31,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
+
 public class Add_criminal extends AppCompatActivity {
-//hiddd
+    private static final String IMAGE_DIRECTORY_NAME = "Criminals photos";
+
+    private Uri fileUri; // file url to store image/video
     private int mYear;
     private int mMonth;
     private int mDay;
@@ -51,6 +59,7 @@ public class Add_criminal extends AppCompatActivity {
 
         setContentView(R.layout.add_criminal);
         add_criminal = (Button) findViewById(R.id.add_criminal);
+        Button take_photo = (Button) findViewById(R.id.take_photo);
         fullname = (EditText) findViewById(R.id.fullname);
         date = (EditText) findViewById(R.id.date);
 
@@ -81,7 +90,16 @@ public class Add_criminal extends AppCompatActivity {
         });
 
 
+take_photo.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, 1);
+    }
 
+
+}});
 
 
 
@@ -122,7 +140,9 @@ public class Add_criminal extends AppCompatActivity {
     }
 
 
-void insert_info(String url){
+
+
+    void insert_info(String url){
     // String id = editTextId.getText().toString().trim();
     //   if (id.equals("")) {
     //      Toast.makeText(this, "Please enter an id", Toast.LENGTH_LONG).show();
@@ -327,5 +347,17 @@ suspect_id=a;
         }
     });
     }
+    private void captureImage() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+      //  fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+
+        // start the image capture Intent
+        startActivityForResult(intent, 200);
+    }
+
+
 
 }

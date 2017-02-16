@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/bg_main">
 
         <LinearLayout
             android:orientation="vertical"
@@ -18,27 +20,32 @@
             android:id="@+id/linearLayout">
 
 
+            <EditText android:id="@+id/editName"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:hint="Username"
+                android:textColor="#FF192133"
+                android:textColorHint="@color/btn_login"
+                android:fontFamily="sans-serif-light"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:singleLine="true"
+                android:selectAllOnFocus="false"
+                android:elevation="0dp"
+                tools:textColor="@android:color/holo_green_light"
+                android:background="@color/btn_login_bg" />
 
-                <EditText android:id="@+id/editName"
+            <EditText android:id="@+id/editPassword"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Username"
-                    android:textColor="#FF192133"
-                    android:textColorHint="#A0192133"
-                    android:fontFamily="sans-serif-light"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true" />
-
-                <EditText android:id="@+id/editPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="63dp"
                     android:inputType="textPassword"
-                    android:textColor="#FF192133"
-                    android:textColorHint="#A0192133"
+                    android:textColor="@color/bg_login"
+                    android:textColorHint="@color/btn_login"
                     android:fontFamily="sans-serif-light"
                     android:hint="Password"
                     android:focusable="true"
-                    android:focusableInTouchMode="true" />
+                    android:focusableInTouchMode="true"
+                    android:background="@color/bg_login" />
 
                 <EditText android:id="@+id/editEmail"
                     android:layout_width="match_parent"
@@ -53,19 +60,19 @@
                     android:focusableInTouchMode="true" />
 
 
-
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnSignIn"
-                android:text="SIGN IN"
-                android:textStyle="bold"
-                />
-
         </LinearLayout>
 
-
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnSignIn"
+            android:text="SIGN IN"
+            android:textStyle="bold"
+            android:background="@color/bg_login"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/linearLayout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
 
     </RelativeLayout>

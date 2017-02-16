@@ -32,11 +32,10 @@ import com.android.volley.toolbox.Volley;
 import com.journaldev.loginphpmysql.R;
 
 public class update_criminal extends AppCompatActivity {
-    boolean fetch_cases = false, fetch_info = false, update_info = false;
-    static int n=0;
-    JSONArray a;
+
+
     int index;
-    String res;
+
     private ProgressDialog loading;
     String id = "";
     String location = "";
@@ -99,7 +98,6 @@ public class update_criminal extends AppCompatActivity {
     public void showInfo()
 
     {
-        fetch_info = true;
 
         city = (EditText) findViewById(R.id.city);
         suspect1 = (MultiAutoCompleteTextView) findViewById(R.id.suspect_crime1);
