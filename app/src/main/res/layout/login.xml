@@ -1,81 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:fillViewport="true">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/colorPrimaryDark">
 
-    <RelativeLayout
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="20dp"
+        app:mtf_cardCollapsedHeight="4dp"
+        app:mtf_hasFocus="false"
+        app:mtf_image="@drawable/ic_email_white_24dp"
+        app:mtf_openKeyboardOnFocus="true">
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_main">
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/editName"
+        android:textColorLink="@color/bg_login"
+        android:hint="Username"
+        android:singleLine="false" />
+    </com.github.florent37.materialtextfield.MaterialTextField>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp"
-            android:id="@+id/linearLayout">
-
-
-            <EditText android:id="@+id/editName"
-                android:layout_width="match_parent"
-                android:layout_height="54dp"
-                android:hint="Username"
-                android:textColor="#FF192133"
-                android:textColorHint="@color/btn_login"
-                android:fontFamily="sans-serif-light"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:singleLine="true"
-                android:selectAllOnFocus="false"
-                android:elevation="0dp"
-                tools:textColor="@android:color/holo_green_light"
-                android:background="@color/btn_login_bg" />
-
-            <EditText android:id="@+id/editPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="63dp"
-                    android:inputType="textPassword"
-                    android:textColor="@color/bg_login"
-                    android:textColorHint="@color/btn_login"
-                    android:fontFamily="sans-serif-light"
-                    android:hint="Password"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:background="@color/bg_login" />
-
-                <EditText android:id="@+id/editEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:textColor="#FF192133"
-                    android:visibility="gone"
-                    android:textColorHint="#A0192133"
-                    android:fontFamily="sans-serif-light"
-                    android:hint="Email"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true" />
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="20dp"
+        app:mtf_cardCollapsedHeight="4dp"
+        app:mtf_hasFocus="false"
+        app:mtf_image="@drawable/ic_email_white_24dp"
+        app:mtf_openKeyboardOnFocus="true">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editPassword"
+        android:hint="Password" />
+    </com.github.florent37.materialtextfield.MaterialTextField>
 
 
-        </LinearLayout>
+    <com.dd.morphingbutton.MorphingButton
+                android:id="@+id/btnSignIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnSignIn"
-            android:text="SIGN IN"
-            android:textStyle="bold"
-            android:background="@color/bg_login"
-            android:layout_marginTop="15dp"
-            android:layout_below="@+id/linearLayout"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-
-    </RelativeLayout>
-
-</ScrollView>
+</LinearLayout>
 

@@ -6,10 +6,11 @@ android {
 
     defaultConfig {
         applicationId "com.journaldev.loginphpmysql"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -31,12 +32,15 @@ android {
         exclude 'META-INF/notice.txt'
     }
 }
-
+repositories {
+    jcenter()
+    maven { url "https://jitpack.io" }
+}
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     compile 'com.google.android.gms:play-services-location:10.0.1'
-
+    compile 'com.github.florent37:materialtextfield:1.0.7'
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
     compile 'com.android.support:support-v4:24.2.1'
@@ -45,4 +49,5 @@ dependencies {
     compile 'com.android.support:cardview-v7:24.2.1'
     compile 'com.google.android.gms:play-services:10.0.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.github.dmytrodanylyk:android-morphing-button:98a4986e56' // commit hash
 }
