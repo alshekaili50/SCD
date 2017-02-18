@@ -1,8 +1,13 @@
 package com.IEEE.SCD;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -29,6 +35,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -36,7 +43,7 @@ import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
 public class Add_criminal extends AppCompatActivity {
     private static final String IMAGE_DIRECTORY_NAME = "Criminals photos";
-
+    ImageView mImageView;
     private Uri fileUri; // file url to store image/video
     private int mYear;
     private int mMonth;
@@ -54,18 +61,28 @@ public class Add_criminal extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.add_criminal);
+        mImageView=(ImageView)findViewById(R.id.view_photo);
         add_criminal = (Button) findViewById(R.id.add_criminal);
         Button take_photo = (Button) findViewById(R.id.take_photo);
         fullname = (EditText) findViewById(R.id.fullname);
         date = (EditText) findViewById(R.id.date);
-
         male = (RadioButton) findViewById(R.id.male);
         female = (RadioButton) findViewById(R.id.female);
+        Button load_photo = (Button) findViewById(R.id.load_photo);
+        load_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);//
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"),5);
+
+            }
+        });
         date.setOnClickListener(new View.OnClickListener() {
+
 
             @Override
             public void onClick(View v) {
@@ -93,10 +110,7 @@ public class Add_criminal extends AppCompatActivity {
 take_photo.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, 1);
-    }
+        dispatchTakePictureIntent();
 
 
 }});
@@ -139,6 +153,37 @@ take_photo.setOnClickListener(new View.OnClickListener() {
 
     }
 
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            mImageView.setImageBitmap(imageBitmap);
+        }
+        else if(requestCode==5){
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+
+            mImageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            }
+        }
 
 
 
@@ -148,7 +193,7 @@ take_photo.setOnClickListener(new View.OnClickListener() {
     //      Toast.makeText(this, "Please enter an id", Toast.LENGTH_LONG).show();
     //     return;
     //   }
-    loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+    loading = ProgressDialog.show( this,"Please wait...","Fetching...",false,false);
 
 
     StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
@@ -191,6 +236,7 @@ void fetch_cases(String url){
         public void onResponse(String response) {
             loading.dismiss();
             JSONObject j=null;
+            if(response.length()!=0){
             try{
                 JSONArray json=new JSONArray(response);
 
@@ -207,7 +253,7 @@ void fetch_cases(String url){
 
             } catch (JSONException e) {
                 e.printStackTrace();
-            }
+            }}
         }
     },
             new Response.ErrorListener() {
@@ -346,16 +392,6 @@ suspect_id=a;
 
         }
     });
-    }
-    private void captureImage() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-      //  fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
-
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-
-        // start the image capture Intent
-        startActivityForResult(intent, 200);
     }
 
 

@@ -43,14 +43,12 @@ public class add_case extends AppCompatActivity {
     String case_id;
     private ProgressDialog loading;
     ArrayList<String> suspect_names = new ArrayList<String>();
-    private TextView tvDisplayDate;
-    private DatePicker dpResult;
-    private Button btnChangeDate;
+
 
     private int mYear;
     private int mMonth;
     private int mDay;
-    static final int DATE_DIALOG_ID = 999;
+
 int PLACE_PICKER_REQUEST=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
