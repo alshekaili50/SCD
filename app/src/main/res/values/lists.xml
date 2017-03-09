@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="type_of_crimes">
+        <item></item>
+        <item>Homicide</item>
+        <item>Assault</item>
+        <item>Kidnapping</item>
+        <item>Drug Possession
+</item>
+
+        <item>Arson</item>
+        <item>Burglary</item>
+        <item>Forgery</item>
+        <item>Larceny</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="cities">
+        <item>Dubai</item>
+        <item>Abu Dhabi</item>
+        <item>Sharjah</item>
+        <item>Ras Al Khaimah</item>
+        <item>Fujairah</item>
+        <item>Ajman</item>
+        <item>Umm Al Quwain</item>
+    </string-array>
+    <string-array name="heights">
+        <item>less than 150cm</item>
+        <item>151-165</item>
+        <item>166-180</item>
+        <item>grater than 180cm</item>
+    </string-array>
+    <string-array name="skin">
+    <item>Pale</item>
+    <item>White</item>
+    <item>Tanned</item>
+    <item>Brown</item>
+    <item>Dark Brown</item>
+    <item>Black</item>
+</string-array>
+    <string-array name="body">
+        <item>Ectomorph
+</item>
+        <item>Endomorph</item>
+        <item>Mesomorph</item>
+    </string-array>
+</resources>
+
+
+

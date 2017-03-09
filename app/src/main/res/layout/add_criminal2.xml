@@ -46,7 +46,7 @@
                 android:textColor="#372c24"
                 android:text="City"/>
 
-            <EditText android:id="@+id/city"
+            <AutoCompleteTextView android:id="@+id/city"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
 

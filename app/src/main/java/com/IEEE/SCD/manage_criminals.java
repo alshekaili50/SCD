@@ -103,7 +103,8 @@ LayoutInflater layout1;
                 Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(strKeySearch.getWindowToken(), 0);
 
-        String url = "http://crimes.6te.net/jsonData.php?set=0&search="+strKeySearch.getText().toString();
+        String url = "http://scd.net23.net/jsonData.php?set=0&search="+strKeySearch.getText().toString();
+        url = url.replaceAll(" ", "%20");
 show( url );
 
 
@@ -346,8 +347,16 @@ TextView text1=(TextView)layout.findViewById( R.id.textid );
             text3.setText( "Date of birth: "+MyArrList.get(info.position).get("dob").toString());
             text4.setText( "City: "+MyArrList.get(info.position).get("city").toString());
             text5.setText( "Type of past crimes: "+MyArrList.get(info.position).get("type").toString());
-            text6.setText( "Suspect crimes: "+MyArrList.get(info.position).get("s1").toString());
-
+            String [] sus={MyArrList.get(info.position).get("s1").toString(),MyArrList.get(info.position).get("s2").toString(),
+                    MyArrList.get(info.position).get("s3").toString(),MyArrList.get(info.position).get("s4").toString(),
+                    MyArrList.get(info.position).get("s5").toString()};
+            String s="";
+            for(int i=0;i<5;i++){
+               if(sus[i].length()==5){
+                   s=s+sus[i]+",";
+                   text6.setText( "Suspect crimes: "+s);
+               }
+            }
             text7.setText( "Gender: "+MyArrList.get(info.position).get("sex").toString());
 
             PopupWindow popupMenu = new PopupWindow(layout, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);

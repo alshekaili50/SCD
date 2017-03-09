@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
@@ -48,7 +49,7 @@ public class update_criminal extends AppCompatActivity {
     String MemberID;
     Button btnSave;
     Button btnCancel;
-    EditText city;
+    AutoCompleteTextView city;
     MultiAutoCompleteTextView suspect1;
     ArrayList<String> cases_id = new ArrayList<String>();
 
@@ -82,48 +83,35 @@ public class update_criminal extends AppCompatActivity {
             }
         });
 
-
-        // btnCancel
         final Button btnCancel = (Button) findViewById(R.id.cancel);
-        // Perform action on click
         btnCancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent newActivity = new Intent(update_criminal.this, manage_criminals.class);
                 startActivity(newActivity);
             }
         });
-
     }
 
     public void showInfo()
 
     {
-
-        city = (EditText) findViewById(R.id.city);
+        city = (AutoCompleteTextView) findViewById(R.id.city);
         suspect1 = (MultiAutoCompleteTextView) findViewById(R.id.suspect_crime1);
-
-
+        String[] cities = getResources().getStringArray(R.array.cities);
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>
+                (this,android.R.layout.simple_list_item_1,cities);
+        city.setThreshold(0);
+        city.setAdapter( adapter3 );
         spinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.type_of_crimes, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        //      fetch_cases=true;
-//getData("http://crimes.6te.net/case.php?command=fetch_all_cases");
         spinner.setAdapter(adapter);
-
-
-
         btnSave = (Button) findViewById(R.id.save);
         btnCancel = (Button) findViewById(R.id.cancel);
-
         Intent intent = getIntent();
-
         MemberID = intent.getStringExtra("MemberID");
-
-        String url = "http://crimes.6te.net/criminals.php?id=" + MemberID;
-
+        String url = "http://scd.net23.net/criminals.php?id=" + MemberID;
         showinfo();
 
 
@@ -132,14 +120,12 @@ public class update_criminal extends AppCompatActivity {
 
     public boolean SaveData() {
 
-
-
         final AlertDialog.Builder ad = new AlertDialog.Builder(this);
-       location=city.getText().toString().trim();
-        type=spinner.getSelectedItem().toString().trim();
+       location=city.getText().toString();
+        type=spinner.getSelectedItem().toString();
         String [] sus_ids=new String[5];
         if(suspect1.getText().toString()!=null){
-            String s=suspect1.getText().toString().trim();
+            String s=suspect1.getText().toString();
             String[]ids=s.split(",");
 
             for(int i=0;i<ids.length;i++){
@@ -150,11 +136,11 @@ public class update_criminal extends AppCompatActivity {
                 }
             }
 
-
-
         }
 
-        String url="http://crimes.6te.net/insert_criminal.php?info=1&id="+MemberID+"&city="+location+"&past_type="+type+"&suspect1="+sus_ids[0]+"&suspect2="+sus_ids[1]+"&suspect3="+sus_ids[2]+"&suspect4="+sus_ids[3]+"&suspect5="+sus_ids[4];
+
+        String url="http://scd.net23.net/insert_criminal.php?info=1&id="+MemberID+"&city="+location+"&past_type="+type+"&suspect1="+sus_ids[0]+"&suspect2="+sus_ids[1]+"&suspect3="+sus_ids[2]+"&suspect4="+sus_ids[3]+"&suspect5="+sus_ids[4];
+        url = url.replaceAll(" ", "%20");
         update(url);
 
 
@@ -162,15 +148,13 @@ public class update_criminal extends AppCompatActivity {
     }
 
 
-
     private void showinfo()  {
-
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
 
 // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://crimes.6te.net/criminals.php?id="+ MemberID,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://scd.net23.net/criminals.php?id="+ MemberID,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -255,7 +239,7 @@ public class update_criminal extends AppCompatActivity {
 
 
 // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://crimes.6te.net/case.php?command=fetch_all_cases",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://scd.net23.net/case.php?command=fetch_all_cases",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

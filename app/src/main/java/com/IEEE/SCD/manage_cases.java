@@ -107,8 +107,8 @@ public class manage_cases extends Activity {
 
 
 
-        String url = "http://crimes.6te.net/jsonData.php?set=1&search="+strKeySearch.getText().toString();
-
+        String url = "http://scd.net23.net/jsonData.php?set=1&search="+strKeySearch.getText().toString();
+        url = url.replaceAll(" ", "%20");
         // Paste Parameters
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         //  params.add(new BasicNameValuePair("txtKeyword", strKeySearch.getText().toString()));
@@ -277,22 +277,12 @@ show( url );
                                     map = new HashMap<String, String>();
                                     map.put("id", c.getString("id"));
                                     map.put("name", c.getString("name"));
-                                    map.put("location", c.getString("location"));
+                                    map.put("lat", c.getString("lat"));
+                                    map.put("lang", c.getString("lang"));
                                     map.put("crime_date", c.getString("crime_date"));
                                     map.put("crime_time", c.getString("crime_time"));
                                     map.put("uploaded_date", c.getString("uploaded_date"));
                                     map.put("uploaded_time", c.getString("uploaded_time"));
-                                    map.put("victim1", c.getString("victim1"));
-                                    map.put("victim2", c.getString("victim2"));
-                                    map.put("victim3", c.getString("victim3"));
-                                    map.put("victim4", c.getString("victim4"));
-                                    map.put("victim5", c.getString("victim5"));
-                                    map.put("suspect1", c.getString("suspect1"));
-                                    map.put("suspect2", c.getString("suspect2"));
-                                    map.put("suspect3", c.getString("suspect3"));
-                                    map.put("suspect4", c.getString("suspect4"));
-                                    map.put("suspect5", c.getString("suspect5"));
-                                    map.put("evidence", c.getString("evidence"));
                                     map.put("crime_type", c.getString("crime_type"));
 
 
@@ -363,15 +353,29 @@ show( url );
             text2.setText( "Name: "+MyArrList.get(info.position).get("name").toString());
             text3.setText( "Crime date: "+MyArrList.get(info.position).get("crime_date").toString());
             text4.setText( "Crime time: "+MyArrList.get(info.position).get("crime_time").toString());
-            text5.setText( "Location: "+MyArrList.get(info.position).get("location").toString());
+            text5.setText( "Latitude: "+MyArrList.get(info.position).get("lat").toString()+ " Longitude:"+MyArrList.get(info.position).get("lang").toString());
             text6.setText( "Crime type: "+MyArrList.get(info.position).get("crime_type").toString());
-
-
-            text7.setText( "Victims: "+MyArrList.get(info.position).get("victim1").toString());
-            text8.setText( "Suspects: "+MyArrList.get(info.position).get("suspect1").toString());
+            String [] vics={MyArrList.get(info.position).get("victim1").toString(),MyArrList.get(info.position).get("victim2").toString(),
+                    MyArrList.get(info.position).get("victim3").toString(),MyArrList.get(info.position).get("victim4").toString(),
+                    MyArrList.get(info.position).get("victim5").toString()};
+            String v="";
+            for(int i=0;i<5;i++){
+                if(vics[i].length()>4){
+                    v=v+vics[i]+",";
+                    text7.setText( "Victims: "+v);
+                }
+            }
+            String [] sus={MyArrList.get(info.position).get("suspect1").toString(),MyArrList.get(info.position).get("suspect2").toString(),
+                    MyArrList.get(info.position).get("suspect3").toString(),MyArrList.get(info.position).get("suspect4").toString(),
+                    MyArrList.get(info.position).get("suspect5").toString()};
+            String s="";
+            for(int i=0;i<5;i++){
+                if(sus[i].length()==5){
+                    s=s+sus[i]+",";
+                    text8.setText( "Suspects: "+s);
+                }
+            }
             text9.setText( "Evidences: "+MyArrList.get(info.position).get("evidence").toString());
-
-
             PopupWindow popupMenu = new PopupWindow(layout, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
 
             //    pwindo = new PopupWindow(layout, 400, 600, true);

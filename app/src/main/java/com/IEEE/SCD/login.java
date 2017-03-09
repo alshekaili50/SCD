@@ -3,6 +3,7 @@ package com.IEEE.SCD;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -31,7 +32,7 @@ public class login extends BaseActivity{
     EditText editEmail, editPassword, editName;
     MorphingButton btnSignIn, btnRegister;
 
-    String URL = "http://crimes.6te.net/user.php";
+    String URL = "http://scd.net23.net/user.php";
 
 
 
@@ -110,10 +111,11 @@ public class login extends BaseActivity{
 
     private void show_criminals(final String user, final String password)  {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://crimes.6te.net/user.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://scd.net23.net/user.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.d("g",response);
                         if(response!=null){
                         if(Integer.valueOf( response )==1){
                             onMorphButton1Clicked(btnSignIn);
@@ -129,16 +131,13 @@ public class login extends BaseActivity{
                             onMorphButton2Clicked(btnSignIn);
 
                         }
-                    }else{
-                            Toast.makeText(login.this,"Could not retrieve information from server",Toast.LENGTH_LONG).show();
-
-                        }
+                    }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(login.this,error.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(login.this,"Check you internet connectivity",Toast.LENGTH_LONG).show();
                     }
                 }){
             @Override
@@ -146,7 +145,6 @@ public class login extends BaseActivity{
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("username",user);
                 params.put("password",password);
-
                 return params;
             }
 

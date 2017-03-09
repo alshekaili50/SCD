@@ -40,7 +40,6 @@ public class Update_Case extends AppCompatActivity {
     String res;
     private ProgressDialog loading;
     String id = "";
-    String location = "";
     String sus1 = "";
     String sus2 = "";
     String sus3 = "";
@@ -128,7 +127,7 @@ public class Update_Case extends AppCompatActivity {
 
         MemberID = intent.getStringExtra("MemberID");
 
-        String url = "http://crimes.6te.net/criminals.php?id=" + MemberID;
+        String url = "http://scd.net23.net/criminals.php?id=" + MemberID;
 
         showinfo();
 
@@ -142,14 +141,14 @@ public class Update_Case extends AppCompatActivity {
 
         final AlertDialog.Builder ad = new AlertDialog.Builder(this);
        ;
-        type=spinner.getSelectedItem().toString().trim();
+        type=spinner.getSelectedItem().toString();
         String [] sus_ids=new String[5];
         if(suspect1.getText().toString()!=null){
-            String s=suspect1.getText().toString().trim();
+            String s=suspect1.getText().toString();
             String[]ids=s.split(",");
 
             for(int i=0;i<ids.length;i++){
-                if(ids[i]!=null&&ids[i].length()==5){
+                if(ids[i].length()==5){
                     sus_ids[i]=ids[i];
                 }else{
                     break;
@@ -161,7 +160,7 @@ public class Update_Case extends AppCompatActivity {
         }
         String vics[]=new String[5];
         if(victims.getText().toString()!=null){
-            String v=victims.getText().toString().trim();
+            String v=victims.getText().toString();
             String[] vis =v.split(",");
 
             for(int i=0;i<vis.length;i++){
@@ -171,8 +170,12 @@ public class Update_Case extends AppCompatActivity {
             }
 
         }
+        if(evidence.getText().toString()!=null){
+            ev=evidence.getText().toString();
+        }
 
-        String url="http://crimes.6te.net/insert_case.php?info=1&id="+MemberID+"&victim1="+vics[0]+"&victim2="+vics[1]+"&victim3="+vics[2]+"&victim4="+vics[3]+"&victim5="+vics[4]+"&suspect1="+sus_ids[0]+"&suspect2="+sus_ids[1]+"&suspect3="+sus_ids[2]+"&suspect4="+sus_ids[3]+"&suspect5="+sus_ids[4]+"&evidence="+ev+"&type="+type;
+        String url="http://scd.net23.net/insert_case.php?info=1&id="+MemberID+"&victim1="+vics[0]+"&victim2="+vics[1]+"&victim3="+vics[2]+"&victim4="+vics[3]+"&victim5="+vics[4]+"&suspect1="+sus_ids[0]+"&suspect2="+sus_ids[1]+"&suspect3="+sus_ids[2]+"&suspect4="+sus_ids[3]+"&suspect5="+sus_ids[4]+"&evidence="+ev+"&type="+type;
+        url = url.replaceAll(" ", "%20");
         update(url);
 
 
@@ -188,7 +191,7 @@ public class Update_Case extends AppCompatActivity {
 
 
 // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://crimes.6te.net/case.php?command=fetch_case_info&id="+ MemberID,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://scd.net23.net/case.php?command=fetch_case_info&id="+ MemberID,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -245,15 +248,11 @@ public class Update_Case extends AppCompatActivity {
                                 String v = "";
                                 String[] vis = {victim1, victim2, victim3, victim4, victim5};
                                 for (int i = 0; i <= 4; i++) {
-                                    if (sus[i].length()>=3) {
+                                    if (vis[i].length()>4) {
                                         v = v + vis[i] + ",";
                                     }
                                 }
-
-
-
-
-
+                                victims.setText( v );
                             } else {
 
 
@@ -295,7 +294,7 @@ public class Update_Case extends AppCompatActivity {
 
 
 // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://crimes.6te.net/case.php?command=fetch_all_suspects",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://scd.net23.net/case.php?command=fetch_all_suspects",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

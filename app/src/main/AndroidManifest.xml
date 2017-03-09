@@ -7,6 +7,7 @@
         android:required="true" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -32,7 +33,11 @@
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
         <activity
-            android:name="com.IEEE.SCD.options"
+        android:name="com.IEEE.SCD.options"
+        android:label="@string/title_activity_options"
+        android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.IEEE.SCD.SCD"
             android:label="@string/title_activity_options"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--

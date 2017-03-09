@@ -35,6 +35,18 @@
                 android:layout_height="wrap_content"
 
                 />
+            <TextView android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:textColor="#372c24"
+                      android:text="Main weapon:"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/weapon"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                />
+
 
 
 
@@ -43,7 +55,11 @@
                 android:layout_height="wrap_content"
                 android:textColor="#372c24"
                 android:text="Victims"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <MultiAutoCompleteTextView android:id="@+id/victims"
+
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
@@ -51,11 +67,36 @@
                 android:layout_marginBottom="20dip"
                 android:hint=""
                 android:inputType="textAutoComplete|textMultiLine"
-                android:layout_weight="0.97" />
+                android:layout_weight="0.97"
+                  android:focusable="false"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_1488460827_icon_person_add"
+                android:padding="15dp"
+                android:id="@+id/btn_add_victim"
+
+                />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/edit"
+                    android:padding="15dp"
+                    android:id="@+id/edit"
+
+                    />
+        </LinearLayout>
             <TextView android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#372c24"
                 android:text="Suspects:"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <MultiAutoCompleteTextView android:id="@+id/suspects_case"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -64,11 +105,35 @@
                 android:layout_marginBottom="20dip"
                 android:hint=""
                 android:inputType="textAutoComplete|textMultiLine"
-                android:layout_weight="0.97" />
+                android:layout_weight="0.97"
+                                       android:focusable="false"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_1488460827_icon_person_add"
+                android:padding="15dp"
+                android:id="@+id/btn_add"
+
+                />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/edit"
+                    android:padding="15dp"
+                    android:id="@+id/edit2"
+
+                    />
+            </LinearLayout>
             <TextView android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#372c24"
                 android:text="Evidences:"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <MultiAutoCompleteTextView android:id="@+id/evidence"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -77,7 +142,59 @@
                 android:layout_marginBottom="20dip"
                 android:hint=""
                 android:inputType="textAutoComplete|textMultiLine"
-                android:layout_weight="0.64" />
+                android:layout_weight="0.64"
+                                       android:focusable="false"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:src="@drawable/add_evidence"
+                android:padding="15dp"
+                android:id="@+id/add_evidence"
+
+                />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/edit"
+                    android:padding="15dp"
+                    android:id="@+id/edit3"
+
+                    />
+            </LinearLayout>
+            <TextView android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:textColor="#372c24"
+                      android:text="Witnesses:"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <MultiAutoCompleteTextView android:id="@+id/witness"
+                                       android:layout_width="fill_parent"
+                                       android:layout_height="wrap_content"
+                                       android:layout_marginTop="5dip"
+                                       android:singleLine="true"
+                                       android:layout_marginBottom="20dip"
+                                       android:hint=""
+                                       android:inputType="textAutoComplete|textMultiLine"
+                                       android:layout_weight="0.64"
+                                       android:focusable="false"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:src="@drawable/edit"
+                android:padding="15dp"
+                android:id="@+id/edit4"
+
+                />
+            </LinearLayout>
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <!-- Register Button -->
             <Button android:id="@+id/Save"
