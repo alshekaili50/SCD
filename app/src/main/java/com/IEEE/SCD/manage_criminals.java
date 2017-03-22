@@ -2,9 +2,12 @@ package com.IEEE.SCD;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -16,11 +19,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,10 +58,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
 public class manage_criminals extends Activity {
+    private int mYear;
+    private int mMonth;
+    private int mDay;
+    suspect s;
     int x=1;
     ArrayList<HashMap<String, String>> MyArrList;
     String[] Cmd = {"View","Update","Delete"};
@@ -140,12 +152,8 @@ show( url );
             Toast.makeText(manage_criminals.this,"Your Selected Update",Toast.LENGTH_LONG).show();
 
             String sMemberID = MyArrList.get(info.position).get("id").toString();
-            String sName = MyArrList.get(info.position).get("name").toString();
-            String sTel = MyArrList.get(info.position).get("dob").toString();
+            show_suspect_dialog(MyArrList,info.position);
 
-            Intent newActivity = new Intent(manage_criminals.this,update_criminal.class);
-            newActivity.putExtra("MemberID", sMemberID);
-            startActivity(newActivity);
 
         } else if ("Delete".equals(CmdName)) {
             Toast.makeText(manage_criminals.this,"Your Selected Delete",Toast.LENGTH_LONG).show();
@@ -217,34 +225,6 @@ show( url );
     }
 
 
-    public String getJSONUrl(String url,List<NameValuePair> params) {
-        StringBuilder str = new StringBuilder();
-        HttpClient client = new DefaultHttpClient();
-        HttpPost httpPost = new HttpPost(url);
-
-        try {
-            httpPost.setEntity(new UrlEncodedFormEntity(params));
-            HttpResponse response = client.execute(httpPost);
-            StatusLine statusLine = response.getStatusLine();
-            int statusCode = statusLine.getStatusCode();
-            if (statusCode == 200) { // Download OK
-                HttpEntity entity = response.getEntity();
-                InputStream content = entity.getContent();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(content));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    str.append(line);
-                }
-            } else {
-                Log.e("Log", "Failed to download result..");
-            }
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return str.toString();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -278,15 +258,10 @@ show( url );
                                     map.put("name", c.getString("name"));
                                     map.put("dob", c.getString("dob"));
                                     map.put("sex", c.getString("sex"));
-                                    map.put("city", c.getString("city"));
-                                    map.put("type", c.getString("past_crimes_type"));
-                                    map.put("s1", c.getString("suspect_crimes1"));
-                                    map.put("s2", c.getString("suspect_crimes2"));
-                                    map.put("s3", c.getString("suspect_crimes3"));
-                                    map.put("s4", c.getString("suspect_crimes4"));
-                                    map.put("s5", c.getString("suspect_crimes5"));
+                                    map.put("body_type", c.getString("body_type"));
+                                    map.put("height", c.getString("height"));
+                                    map.put("skin_color", c.getString("skin_color"));
                                     map.put("num", Integer.toString(x));
-
                                     x++;
                                     MyArrList.add(map);
                                     Log.d( "a" ,MyArrList.get( i ).get( "id" ));
@@ -369,11 +344,188 @@ TextView text1=(TextView)layout.findViewById( R.id.textid );
             e.printStackTrace();
         }
     }
+void fetch_suspect_info(String id){
+    RequestQueue queue = Volley.newRequestQueue(this);
+
+
+// Request a string response from the provided URL.
+    StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://scd.net23.net/criminals.php?id="+ id,
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    JSONArray c = null;
+
+
+                    try {
+
+
+                        c = new JSONArray(response);
+                        JSONObject b = new JSONObject(response);
+                        //b = c.getJSONObject(0);
+                        s.setId( b.getString("id") );
+                        s.setBody_type( b.getString( "body_type" ) );
+                        s.setDob( b.getString( "dob" ) );
+                        s.setGender( b.getString( "sex" ) );
+                        s.setHeight( b.getString( "height" ) );
+                        s.setName( b.getString( "name" ) );
+                        s.setSkin_color( b.getString( "skin_color"));
+
+
+
+                        }
+
+
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                   // show_suspect_dialog();
+                }
+            }, new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            Toast.makeText(manage_criminals.this, "Cannot fetch information", Toast.LENGTH_LONG).show();
+        }
+    });
+// Add the request to the RequestQueue.
+    queue.add(stringRequest);
+
+}
+
+
+
+
+    void show_suspect_dialog(final ArrayList<HashMap<String, String>> Myarraylist, final int pos){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.new_suspect, null);
+        dialogBuilder.setView(dialogView);
+         final EditText full_name = (EditText) dialogView.findViewById(R.id.fullname);
+       full_name.setText(Myarraylist.get( pos ).get( "name" ).toString());
+
+         final EditText date_of_suspect = (EditText) dialogView.findViewById( R.id.dob );
+         final RadioButton male = (RadioButton) dialogView.findViewById(R.id.male);
+         final RadioButton female = (RadioButton) dialogView.findViewById(R.id.female);
+         final EditText height=(EditText)dialogView.findViewById( R.id.height );
+         final Spinner body_type=(Spinner)dialogView.findViewById( R.id.body );
+         final Spinner sking=(Spinner)dialogView.findViewById( R.id.skin );
+        date_of_suspect.setText(Myarraylist.get( pos ).get( "dob" ).toString() );
+        height.setText( Myarraylist.get( pos ).get( "height" ).toString( ));
+
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+                R.array.skin, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sking.setAdapter(adapter2);
+        ArrayAdapter<CharSequence> adapter3= ArrayAdapter.createFromResource(this,
+                R.array.body, android.R.layout.simple_spinner_item);
+        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        body_type.setAdapter(adapter3);
+
+        date_of_suspect.setOnClickListener( new View.OnClickListener() {
+            @Override
+
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                final Calendar c = Calendar.getInstance();
+                mYear = 2000;
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dpd = new DatePickerDialog(manage_criminals.this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                date_of_suspect.setText(dayOfMonth + "-"
+                                        + (monthOfYear + 1) + "-" + year);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                dpd.show();
+
+            } });
+
+        dialogBuilder.setTitle("New suspect");
+
+        dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                if(full_name.getText().length()<3)
+                {
+                    Toast.makeText(manage_criminals.this,"Please enter valid name",Toast.LENGTH_LONG).show();
+
+                }
+                else if(date_of_suspect.getText().length()<3){
+                    Toast.makeText(manage_criminals.this,"Please enter valid date",Toast.LENGTH_LONG).show();
+
+                }
+                else if(!male.isChecked()&&!female.isChecked()){
+                    Toast.makeText(manage_criminals.this,"Please select gender",Toast.LENGTH_LONG).show();
+
+                }
+                else{
+                    String name,date,gender;
+                    name=full_name.getText().toString();
+                    date=date_of_suspect.getText().toString();
+                    if(male.isChecked())
+                        gender="male";
+                    else gender="female";
+                    String color,body,h,et;
+                    color=sking.getSelectedItem().toString();
+                    body=body_type.getSelectedItem().toString();
+                    h=height.getText().toString();
+
+
+                    Log.d("ali",name);
+
+                    String url="http://scd.net23.net/insert_criminal.php?set=1&id="+Myarraylist.get( pos ).get( "id" ).toString()+"&skin_color="+color+"&height="+h+"&body_type="+body+"&dob="+date+"&gender="+gender+"&name="+name;
+                    url = url.replaceAll(" ", "%20");
+                    update( url );
+
+
+
+
+                }
+
+            }
+        });
+        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //pass
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+
+    }
+
+    void update(String url){
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+
+// Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.length()==1){
+                            Toast.makeText(manage_criminals.this, "Information has been updated", Toast.LENGTH_LONG).show();
+                            ShowData();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(manage_criminals.this, "Could not update the information", Toast.LENGTH_LONG).show();
+            }
+        });
+// Add the request to the RequestQueue.
+        queue.add(stringRequest);
+
+    }
 
 
 
 
 
 
-
-   }
+}

@@ -41,7 +41,7 @@ public class criminals_menu extends Fragment {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), Add_criminal.class);
+                Intent i = new Intent(getActivity(), SCD.class);
                 startActivity(i);
 
             }
