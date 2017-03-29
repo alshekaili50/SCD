@@ -40,7 +40,7 @@
                       android:textColor="#372c24"
                       android:text="Main weapon:"/>
 
-            <AutoCompleteTextView
+            <Spinner
                 android:id="@+id/weapon"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

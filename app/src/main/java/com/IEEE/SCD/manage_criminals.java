@@ -3,6 +3,7 @@ package com.IEEE.SCD;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -63,6 +64,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class manage_criminals extends Activity {
+    private ProgressDialog loading;
+
     private int mYear;
     private int mMonth;
     private int mDay;
@@ -410,6 +413,13 @@ void fetch_suspect_info(String id){
          final Spinner sking=(Spinner)dialogView.findViewById( R.id.skin );
         date_of_suspect.setText(Myarraylist.get( pos ).get( "dob" ).toString() );
         height.setText( Myarraylist.get( pos ).get( "height" ).toString( ));
+        String c=Myarraylist.get( pos ).get( "sex" ).toString( );
+        if(c.equalsIgnoreCase( "male" )){
+        male.setChecked( true );
+
+        }else if(c.equalsIgnoreCase(  "female")){
+            female.setChecked( true );
+        }
 
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
                 R.array.skin, android.R.layout.simple_spinner_item);
@@ -419,6 +429,16 @@ void fetch_suspect_info(String id){
                 R.array.body, android.R.layout.simple_spinner_item);
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         body_type.setAdapter(adapter3);
+        for(int i=0;i<body_type.getCount();i++){
+            if(body_type.getItemAtPosition( i ).equals( Myarraylist.get( pos ).get( "body_type" ).toString( ) )){
+                body_type.setSelection( i );
+            }
+        }
+        for(int i=0;i<sking.getCount();i++){
+            if(sking.getItemAtPosition( i ).equals( Myarraylist.get( pos ).get( "skin_color" ).toString( ) )){
+                sking.setSelection( i );
+            }
+        }
 
         date_of_suspect.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -501,12 +521,14 @@ void fetch_suspect_info(String id){
     void update(String url){
         RequestQueue queue = Volley.newRequestQueue(this);
 
-
+        loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",true,true);
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
+
                     @Override
                     public void onResponse(String response) {
+                        loading.dismiss();
                         if(response.length()==1){
                             Toast.makeText(manage_criminals.this, "Information has been updated", Toast.LENGTH_LONG).show();
                             ShowData();

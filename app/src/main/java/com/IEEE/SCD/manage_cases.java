@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.StrictMode;
+import android.provider.DocumentsContract;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -47,10 +49,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -142,12 +149,19 @@ show( url );
             Toast.makeText(manage_cases.this,"Your Selected Update",Toast.LENGTH_LONG).show();
 
             String sMemberID = MyArrList.get(info.position).get("id").toString();
-           // String sName = MyArrList.get(info.position).get("name").toString();
+            Intent intent = new Intent(this, Update_Case.class);
 
 
-            Intent newActivity = new Intent(manage_cases.this,Update_Case.class);
-            newActivity.putExtra("MemberID", sMemberID);
-            startActivity(newActivity);
+            intent.putExtra("id", MyArrList.get(info.position).get( "id" ));
+            intent.putExtra("weapon", MyArrList.get(info.position).get( "weapon" ));
+            intent.putExtra("type", MyArrList.get(info.position).get( "crime_type" ));
+
+           // startActivityForResult(intent, 500);
+
+            // String sName = MyArrList.get(info.position).get("name").toString();
+
+
+            startActivity(intent);
 
         } else if ("Delete".equals(CmdName)) {
             Toast.makeText(manage_cases.this,"Your Selected Delete",Toast.LENGTH_LONG).show();
@@ -244,7 +258,13 @@ show( url );
             e.printStackTrace();
         }
         return str.toString();
+    }@Override
+    public void onResume(){
+        super.onResume();
+        ShowData();
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -284,6 +304,7 @@ show( url );
                                     map.put("uploaded_date", c.getString("uploaded_date"));
                                     map.put("uploaded_time", c.getString("uploaded_time"));
                                     map.put("crime_type", c.getString("crime_type"));
+                                    map.put("weapon", c.getString("weapon"));
 
 
 
@@ -386,8 +407,6 @@ show( url );
             e.printStackTrace();
         }
     }
-
-
 
 
 

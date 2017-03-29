@@ -68,7 +68,7 @@ int PLACE_PICKER_REQUEST=1;
      MultiAutoCompleteTextView victims1 ;
      MultiAutoCompleteTextView evidence1;
      Spinner spinner ;
-     AutoCompleteTextView weapon;
+     Spinner weapon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -343,7 +343,7 @@ int PLACE_PICKER_REQUEST=1;
          victims1 = (MultiAutoCompleteTextView) findViewById( R.id.victims );
          evidence1 = (MultiAutoCompleteTextView) findViewById( R.id.evidence );
          spinner = (Spinner) findViewById( R.id.spinner_type );
-         weapon=(AutoCompleteTextView)findViewById( R.id.weapon );
+         weapon=(Spinner) findViewById( R.id.weapon );
         witness=(MultiAutoCompleteTextView) findViewById( R.id.witness );
         witness.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -378,10 +378,17 @@ int PLACE_PICKER_REQUEST=1;
         adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
 // Apply the adapter to the spinner
         spinner.setAdapter( adapter );
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource( this,
+                R.array.weapons, android.R.layout.simple_spinner_item );
+// Specify the layout to use when the list of choices appears
+        adapter2.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+// Apply the adapter to the spinner
+        weapon.setAdapter( adapter2 );
+
 save.setOnClickListener( new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        a.setWeapon( weapon.getText().toString() );
+        a.setWeapon( weapon.getSelectedItem().toString() );
         a.setType( spinner.getSelectedItem().toString() );
         String type,weapon;
         type=a.getType();

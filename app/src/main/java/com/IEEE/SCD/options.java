@@ -20,7 +20,7 @@ import com.journaldev.loginphpmysql.R;
 
 
 public class options extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+         {
 
 
     /**
@@ -32,23 +32,9 @@ public class options extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_options);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-    }
+    }}
+/*
 
     @Override
     public void onBackPressed() {
@@ -90,7 +76,7 @@ public class options extends AppCompatActivity
 
 
         if (id == R.id.nav_camera) {
-            criminals_menu C=new criminals_menu();
+            home_page C=new home_page();
             FragmentManager manger;
             manger = getSupportFragmentManager();
             manger.beginTransaction().replace(R.id.content_options,C).commit();
@@ -108,10 +94,12 @@ public class options extends AppCompatActivity
         return true;
     }
 
-    /**
+    */
+/**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+     *//*
+
     public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
                 .setName("options Page") // TODO: Define a title for the content shown.
@@ -144,3 +132,4 @@ public class options extends AppCompatActivity
         client.disconnect();
     }
 }
+*/

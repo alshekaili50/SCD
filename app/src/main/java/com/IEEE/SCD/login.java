@@ -122,7 +122,7 @@ public class login extends BaseActivity{
                             new Timer().schedule(new TimerTask() {
                                 @Override
                                 public void run() {
-                                    Intent i = new Intent(login.this, options.class);
+                                    Intent i = new Intent(login.this, main_menu.class);
                                     startActivity(i);                                }
                             }, 250);
                         }
