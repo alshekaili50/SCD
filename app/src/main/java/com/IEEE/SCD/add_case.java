@@ -1,7 +1,6 @@
 package com.IEEE.SCD;
 
 import android.app.DatePickerDialog;
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
@@ -26,7 +25,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -65,9 +63,9 @@ int PLACE_PICKER_REQUEST=1;
     case_object a=new case_object();
     MultiAutoCompleteTextView witness;
      MultiAutoCompleteTextView suspects_case;
-     MultiAutoCompleteTextView victims1 ;
+     MultiAutoCompleteTextView victims1;
      MultiAutoCompleteTextView evidence1;
-     Spinner spinner ;
+     Spinner spinner;
      Spinner weapon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

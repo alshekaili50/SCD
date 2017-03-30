@@ -51,8 +51,6 @@
         android:ems="10"
         android:id="@+id/editPassword"
         android:nextFocusForward="@+id/btnSignIn"
-
-
         android:hint="Password" />
     </com.github.florent37.materialtextfield.MaterialTextField>
 

@@ -1,9 +1,9 @@
 package com.IEEE.SCD;
 
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,18 +23,27 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.gordonwong.materialsheetfab.MaterialSheetFab;
+import com.gordonwong.materialsheetfab.MaterialSheetFabEventListener;
 import com.journaldev.loginphpmysql.R;
 
 import java.util.Calendar;
+
+import static android.R.attr.statusBarColor;
 
 public class main_menu extends AppCompatActivity {
     private int mYear;
     private int mMonth;
     private int mDay;
+    private MaterialSheetFab materialSheetFab;
+    private int statusBarColor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main_menu );
+        //----------------------------------------------FAB
+        setupFab();
+        //-------------------------------------------- FAB
       Button  add_case=(Button)findViewById(R.id.new_case);
         add_case.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -314,7 +323,72 @@ public class main_menu extends AppCompatActivity {
 
         requestQueue.add(stringRequest);
     }
+    private void setupFab() {
 
+        Fab fab = (Fab) findViewById(R.id.fab);
+        View sheetView = findViewById(R.id.fab_sheet);
+        View overlay = findViewById(R.id.overlay);
+        int sheetColor = getResources().getColor(R.color.background_card);
+        int fabColor = getResources().getColor(R.color.theme_accent);
 
+        // Create material sheet FAB
+        materialSheetFab = new MaterialSheetFab<>(fab, sheetView, overlay, sheetColor, fabColor);
 
+        // Set material sheet event listener
+        materialSheetFab.setEventListener(new MaterialSheetFabEventListener() {
+            @Override
+            public void onShowSheet() {
+                // Save current status bar color
+                statusBarColor = getStatusBarColor();
+                // Set darker status bar color to match the dim overlay
+                setStatusBarColor(getResources().getColor(R.color.theme_primary_dark2));
+            }
+
+            @Override
+            public void onHideSheet() {
+                // Restore status bar color
+                setStatusBarColor(statusBarColor);
+            }
+        });
+
+        // Set material sheet item click listeners
+        findViewById(R.id.fab_sheet_item_recording).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(main_menu.this,"Recording",Toast.LENGTH_LONG).show();
+            }
+        } );
+        findViewById(R.id.fab_sheet_item_reminder).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(main_menu.this,"Reminder",Toast.LENGTH_LONG).show();
+            }
+        } );
+        findViewById(R.id.fab_sheet_item_photo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(main_menu.this,"photo",Toast.LENGTH_LONG).show();
+            }
+        } );
+        findViewById(R.id.fab_sheet_item_note).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(main_menu.this,"note",Toast.LENGTH_LONG).show();
+            }
+        } );
+    }
+    private int getStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            return getWindow().getStatusBarColor();
+        }
+        return 0;
+    }
+
+    private void setStatusBarColor(int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(color);
+        }
+    }
 }
+
+

@@ -10,6 +10,21 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.IEEE.SCD.main_menu">
+    <!-- Your FAB implementation -->
+    <com.IEEE.SCD.Fab
+        android:id="@+id/fab"
+        style="@style/Widget.MaterialSheetFab.Fab"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" />
+
+    <!-- Overlay that dims the screen -->
+    <com.gordonwong.materialsheetfab.DimOverlayFrameLayout
+        android:id="@+id/overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Circular reveal container for the sheet -->
 
     <ImageView
         android:layout_width="wrap_content"
@@ -82,6 +97,68 @@
         android:layout_above="@+id/manage_cases"
         android:layout_alignStart="@+id/new_victim"
         android:layout_marginStart="15dp"/>
+
+    <io.codetail.widget.RevealLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="end|bottom"
+        android:orientation="vertical">
+
+        <!-- Sheet that contains your items -->
+        <android.support.v7.widget.CardView
+            android:id="@+id/fab_sheet"
+            android:layout_width="250dp"
+            android:layout_height="300dp">
+            <!-- Sheet items -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Recording -->
+                <TextView
+                    android:id="@+id/fab_sheet_item_recording"
+                    style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
+                    android:drawableLeft="@drawable/ic_mic_grey600_24dp"
+                    android:drawableStart="@drawable/ic_mic_grey600_24dp"
+                    android:text="@string/recording" />
+
+                <!-- Reminder -->
+                <TextView
+                    android:id="@+id/fab_sheet_item_reminder"
+                    style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
+                    android:drawableLeft="@drawable/ic_access_alarms_grey600_24dp"
+                    android:drawableStart="@drawable/ic_access_alarms_grey600_24dp"
+                    android:text="@string/reminder" />
+
+                <!-- Photo -->
+                <TextView
+                    android:id="@+id/fab_sheet_item_photo"
+                    style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
+                    android:drawableLeft="@drawable/ic_photo_camera_grey600_24dp"
+                    android:drawableStart="@drawable/ic_photo_camera_grey600_24dp"
+                    android:text="@string/photo" />
+
+                <!-- Note -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/theme_accent">
+
+                    <TextView
+                        android:id="@+id/fab_sheet_item_note"
+                        style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
+                        android:drawableLeft="@drawable/ic_create_grey600_24dp"
+                        android:drawableStart="@drawable/ic_create_grey600_24dp"
+                        android:text="@string/createnote" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- TODO: Put your sheet items here -->
+
+        </android.support.v7.widget.CardView>
+    </io.codetail.widget.RevealLinearLayout>
 
 
 </RelativeLayout>

@@ -3,7 +3,6 @@ package com.IEEE.SCD;
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -44,7 +43,6 @@ public class victim extends AppCompatActivity {
         url = url.replaceAll(" ", "%20");
         loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
 
-
         StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -54,10 +52,6 @@ public class victim extends AppCompatActivity {
                     Toast.makeText(victim.this,response.toString(),Toast.LENGTH_LONG).show();
 
                 }
-
-
-
-
             }
         },
                 new Response.ErrorListener() {

@@ -2,11 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.0"
+    buildToolsVersion '25.0.0'
+    lintOptions {
+        disable "ResourceType"
+    }
 
     defaultConfig {
         applicationId "com.journaldev.loginphpmysql"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -49,5 +52,6 @@ dependencies {
     compile 'com.google.android.gms:play-services:10.0.1'
     compile 'junit:junit:4.12'
     compile 'com.github.dmytrodanylyk:android-morphing-button:98a4986e56'
+    compile 'com.gordonwong:material-sheet-fab:1.2.1'
     // commit hash
 }
