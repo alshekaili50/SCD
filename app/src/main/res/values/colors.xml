@@ -28,7 +28,7 @@
     <color name="mb_red_dark">#ffcd3a3a</color>
     <color name="mb_gray">#ffdedede</color>
     <color name="holo_blue_bright">#ff00ddff</color>
-    <color name="holo_green_light">#ff99cc00</color>
+    <color name="holo_green_light">#99cc00</color>
     <color name="holo_orange_light">#ffffbb33</color>
     <color name="holo_red_light">#ffff4444</color>
     <dimen name="mb_corner_radius_2">2dp</dimen>

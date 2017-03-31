@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main_menu"
     android:layout_width="match_parent"
@@ -10,101 +11,62 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.IEEE.SCD.main_menu">
+
     <!-- Your FAB implementation -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/manage_cases"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Manage Cases" />
+
+        <Button
+            android:id="@+id/manage_suspects"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Manage Suspects" />
+
+        <Button
+            android:id="@+id/SCD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Serial Criminal Detector" />
+    </LinearLayout>
+
     <com.IEEE.SCD.Fab
         android:id="@+id/fab"
         style="@style/Widget.MaterialSheetFab.Fab"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        app:backgroundTint="@color/holo_green_light"
+        app:rippleColor="@color/common_google_signin_btn_text_dark_pressed" />
 
     <!-- Overlay that dims the screen -->
     <com.gordonwong.materialsheetfab.DimOverlayFrameLayout
         android:id="@+id/overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
     <!-- Circular reveal container for the sheet -->
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:gravity="center"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/news"
-        android:padding="15dp"
-        android:id="@+id/news"
-
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"/>
-
-    <Button
-        android:text="new evidence"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/news"
-        android:layout_marginTop="11dp"
-        android:id="@+id/new_evidence"/>
-
-    <Button
-        android:text="new suspect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/new_evidence"
-        android:layout_toEndOf="@+id/new_evidence"
-        android:layout_marginStart="19dp"
-        android:id="@+id/new_suspect"/>
-
-    <Button
-        android:text="new case"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/new_case"
-        android:layout_below="@+id/news"
-        android:layout_alignParentEnd="true"/>
-
-    <Button
-        android:text="new victim"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/new_victim"
-        android:layout_below="@+id/news"
-        android:layout_toEndOf="@+id/news"/>
-
-    <Button
-        android:text="manage cases"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/manage_cases"
-        android:layout_alignBaseline="@+id/manage_suspects"
-        android:layout_alignBottom="@+id/manage_suspects"
-        android:layout_alignParentStart="true"/>
-
-    <Button
-        android:text="manage suspects"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/manage_suspects"
-        android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/new_suspect"
-        android:layout_marginEnd="16dp"/>
-
-    <Button
-        android:text="Serial criminal detector"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/SCD"
-        android:layout_above="@+id/manage_cases"
-        android:layout_alignStart="@+id/new_victim"
-        android:layout_marginStart="15dp"/>
 
     <io.codetail.widget.RevealLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="end|bottom"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <!-- Sheet that contains your items -->
+
         <android.support.v7.widget.CardView
             android:id="@+id/fab_sheet"
             android:layout_width="250dp"
@@ -115,43 +77,38 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Recording -->
+                <!-- New_Case -->
                 <TextView
-                    android:id="@+id/fab_sheet_item_recording"
+                    android:id="@+id/fab_sheet_item_new_case"
                     style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
-                    android:drawableLeft="@drawable/ic_mic_grey600_24dp"
-                    android:drawableStart="@drawable/ic_mic_grey600_24dp"
-                    android:text="@string/recording" />
+                    android:drawableLeft="@drawable/ic_create_grey600_24dp"
+                    android:drawableStart="@drawable/ic_create_grey600_24dp"
+                    android:text="@string/New_Case" />
 
-                <!-- Reminder -->
+                <!-- New_Evidence -->
                 <TextView
-                    android:id="@+id/fab_sheet_item_reminder"
+                    android:id="@+id/fab_sheet_item_new_evidence"
                     style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
-                    android:drawableLeft="@drawable/ic_access_alarms_grey600_24dp"
-                    android:drawableStart="@drawable/ic_access_alarms_grey600_24dp"
-                    android:text="@string/reminder" />
+                    android:drawableLeft="@drawable/ic_create_grey600_24dp"
+                    android:drawableStart="@drawable/ic_create_grey600_24dp"
+                    android:text="@string/New_Evidence" />
 
-                <!-- Photo -->
+                <!-- New_Suspect -->
                 <TextView
-                    android:id="@+id/fab_sheet_item_photo"
+                    android:id="@+id/fab_sheet_item_new_suspect"
                     style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
-                    android:drawableLeft="@drawable/ic_photo_camera_grey600_24dp"
-                    android:drawableStart="@drawable/ic_photo_camera_grey600_24dp"
-                    android:text="@string/photo" />
+                    android:drawableLeft="@drawable/ic_create_grey600_24dp"
+                    android:drawableStart="@drawable/ic_create_grey600_24dp"
+                    android:text="@string/New_Suspect" />
 
-                <!-- Note -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/theme_accent">
+                <!-- New_Victim -->
 
                     <TextView
-                        android:id="@+id/fab_sheet_item_note"
+                        android:id="@+id/fab_sheet_item_new_victim"
                         style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
                         android:drawableLeft="@drawable/ic_create_grey600_24dp"
                         android:drawableStart="@drawable/ic_create_grey600_24dp"
-                        android:text="@string/createnote" />
-                </LinearLayout>
+                        android:text="@string/New_Victim" />
 
             </LinearLayout>
 

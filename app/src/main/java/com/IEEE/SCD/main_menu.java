@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -26,10 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
 import com.gordonwong.materialsheetfab.MaterialSheetFabEventListener;
 import com.journaldev.loginphpmysql.R;
-
 import java.util.Calendar;
-
-import static android.R.attr.statusBarColor;
 
 public class main_menu extends AppCompatActivity {
     private int mYear;
@@ -44,37 +40,7 @@ public class main_menu extends AppCompatActivity {
         //----------------------------------------------FAB
         setupFab();
         //-------------------------------------------- FAB
-      Button  add_case=(Button)findViewById(R.id.new_case);
-        add_case.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent i = new Intent(main_menu.this, add_case.class);
-                startActivity(i);
-            }
-        } );
-       Button add_evidence=(Button)findViewById(R.id.new_evidence);
-        add_evidence.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                add_evidence_dialog();
-            }
-        } );
-
-        Button add_suspect=(Button)findViewById(R.id.new_suspect);
-        add_suspect.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                add_suspect_dialog();
-            }
-        } );
-        Button add_victim=(Button)findViewById(R.id.new_victim);
-        add_victim.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                add_victim_dialog();
-            }
-        } );
         Button manage_cases=(Button)findViewById(R.id.manage_cases);
         manage_cases.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -267,7 +233,6 @@ public class main_menu extends AppCompatActivity {
                 if(detail.getText().length()<10)
                 {
                     Toast.makeText(main_menu.this,"Please enter valid evidence",Toast.LENGTH_LONG).show();
-
                 }
                 else{
                     String name;
@@ -289,10 +254,6 @@ public class main_menu extends AppCompatActivity {
         });
         AlertDialog b = dialogBuilder.create();
         b.show();
-
-
-
-
 
     }
     void insert_into_db(String url){
@@ -333,7 +294,6 @@ public class main_menu extends AppCompatActivity {
 
         // Create material sheet FAB
         materialSheetFab = new MaterialSheetFab<>(fab, sheetView, overlay, sheetColor, fabColor);
-
         // Set material sheet event listener
         materialSheetFab.setEventListener(new MaterialSheetFabEventListener() {
             @Override
@@ -343,37 +303,36 @@ public class main_menu extends AppCompatActivity {
                 // Set darker status bar color to match the dim overlay
                 setStatusBarColor(getResources().getColor(R.color.theme_primary_dark2));
             }
-
             @Override
             public void onHideSheet() {
                 // Restore status bar color
                 setStatusBarColor(statusBarColor);
             }
         });
-
         // Set material sheet item click listeners
-        findViewById(R.id.fab_sheet_item_recording).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.fab_sheet_item_new_case).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(main_menu.this,"Recording",Toast.LENGTH_LONG).show();
+                Intent i = new Intent(main_menu.this, add_case.class);
+                startActivity(i);
             }
         } );
-        findViewById(R.id.fab_sheet_item_reminder).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.fab_sheet_item_new_evidence).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(main_menu.this,"Reminder",Toast.LENGTH_LONG).show();
+                add_evidence_dialog();
             }
         } );
-        findViewById(R.id.fab_sheet_item_photo).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.fab_sheet_item_new_suspect).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(main_menu.this,"photo",Toast.LENGTH_LONG).show();
+                add_suspect_dialog();
             }
         } );
-        findViewById(R.id.fab_sheet_item_note).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.fab_sheet_item_new_victim).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(main_menu.this,"note",Toast.LENGTH_LONG).show();
+                add_victim_dialog();
             }
         } );
     }
@@ -383,12 +342,9 @@ public class main_menu extends AppCompatActivity {
         }
         return 0;
     }
-
     private void setStatusBarColor(int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(color);
         }
     }
 }
-
-

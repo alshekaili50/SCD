@@ -31,10 +31,10 @@
     <string name="notes">Notes</string>
     <string name="opendrawer">Open drawer</string>
     <string name="photo">Photo</string>
-    <string name="recording">Recording</string>
-    <string name="refresh">Refresh</string>
-    <string name="reminder">Reminder</string>
-    <string name="search">Search</string>
+    <string name="New_Case">New Case</string>
+    <string name="New_Evidence">New Evidence</string>
+    <string name="New_Victim">New Victim</string>
+    <string name="New_Suspect">New Suspect</string>
     <string name="shared">Shared</string>
     <string name="sheet_item_pressed">Item pressed</string>
     <string name="snackbar_shared_msg">Gordon Wong shared a note with you.</string>
