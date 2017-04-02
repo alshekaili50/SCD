@@ -4,6 +4,7 @@
     android:layout_height="fill_parent"
              android:focusable="true"
              android:focusableInTouchMode="true"
+    android:background="@color/colorPrimaryDark"
     >
 
 
@@ -60,6 +61,7 @@
         android:background="#CCCCCC" />
 
     <LinearLayout
+        android:orientation="horizontal"
         android:id="@+id/LinearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

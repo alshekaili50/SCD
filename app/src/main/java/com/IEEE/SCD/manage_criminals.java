@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -63,7 +64,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-public class manage_criminals extends Activity {
+public class manage_criminals extends AppCompatActivity {
     private ProgressDialog loading;
 
     private int mYear;
