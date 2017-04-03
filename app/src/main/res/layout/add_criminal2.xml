@@ -6,10 +6,13 @@
     android:fillViewport="true">
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" android:background="#fff">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        >
 
         <!--  Header  Starts-->
         <LinearLayout android:id="@+id/header"
+            android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
 
@@ -22,6 +25,7 @@
         <!--  Header Ends -->
         <!-- Footer Start -->
         <LinearLayout android:id="@+id/footer"
+            android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="90dip"
 

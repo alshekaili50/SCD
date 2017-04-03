@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.StrictMode;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -37,7 +38,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class SCD extends Activity {
+public class SCD extends AppCompatActivity {
     int x=1;
     ArrayList<HashMap<String, String>> MyArrList;
     String[] Cmd = {"View","Update","Delete"};

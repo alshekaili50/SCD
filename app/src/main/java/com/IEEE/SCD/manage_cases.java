@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -54,7 +55,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class manage_cases extends Activity {
+public class manage_cases extends AppCompatActivity {
     int x=1;
     ArrayList<HashMap<String, String>> MyArrList;
     String[] Cmd = {"View","Update","Delete"};

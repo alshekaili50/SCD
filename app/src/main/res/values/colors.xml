@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303f9f</color>
-    <color name="colorAccent">#FF4081</color>
-<color name="text_white_87">#FF4081</color>
+
         <color name="bg_login">#baeee2</color>
         <color name="bg_register">#2e3237</color>
         <color name="bg_main">#e2eff8</color>
@@ -37,7 +34,7 @@
     <dimen name="mb_width_120">120dp</dimen>
     <dimen name="mb_width_200">200dp</dimen>
     <dimen name="mb_height_56">56dp</dimen>
-    <dimen name="mb_height_8">8dp</dimen>
+    <dimen name="mb_height_8">8dp</dimen> 
     <dimen name="mb_height_4">4dp</dimen>
     <integer name="mb_animation">250</integer>
     <string name="mb_button">SIGN IN</string>
@@ -48,23 +45,7 @@
     <color name="theme_primary">#00BCD4</color>
     <color name="theme_primary_dark">#0097A7</color>
     <color name="theme_primary_dark2">#006064</color>
-
-    <color name="background_card">#fff</color>
+    <color name="background_card">#8BC34A</color>
     <color name="background_snackbar">#323232</color>
-
-    <color name="text_black_87">#de000000</color>
-
-
-    <array name="note_neutral_colors">
-        <item>#9E9E9E</item>
-        <item>#455A64</item>
-        <item>#607D8B</item>
-    </array>
-    <array name="note_accent_colors">
-        <item>#039BE5</item>
-        <item>#3D51B3</item>
-        <item>#689f38</item>
-        <item>#FD7044</item>
-    </array>
 
 </resources>
