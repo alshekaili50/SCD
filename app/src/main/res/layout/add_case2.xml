@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:padding="10dip"
             android:layout_below="@id/header"
+            android:background="@color/colorPrimaryDark"
             android:weightSum="1">
             <!-- Full Name Label -->
 

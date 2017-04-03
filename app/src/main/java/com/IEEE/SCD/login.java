@@ -179,8 +179,8 @@ public class login extends BaseActivity{
                 .cornerRadius(dimen(R.dimen.mb_corner_radius_2))
                 .width(dimen(R.dimen.mb_width_200))
                 .height(dimen(R.dimen.mb_height_56))
-                .color(color(R.color.mb_blue))
-                .colorPressed(color(R.color.mb_blue_dark))
+                .color(color(R.color.colorPrimary))
+                .colorPressed(color(R.color.colorPrimaryDark))
                 .text(getString(R.string.mb_button));
         btnMorph.morph(square);
     }
@@ -196,7 +196,6 @@ public class login extends BaseActivity{
                 .icon(R.drawable.ic_done);
         btnMorph.morph(circle);
     }
-
     private void morphToFailure(final MorphingButton btnMorph, int duration) {
         MorphingButton.Params circle = MorphingButton.Params.create()
                 .duration(duration)
@@ -208,7 +207,4 @@ public class login extends BaseActivity{
                 .icon(R.drawable.ic_lock);
         btnMorph.morph(circle);
     }
-
-
-
 }
