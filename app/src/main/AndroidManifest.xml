@@ -14,7 +14,7 @@
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
+         location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
@@ -35,6 +35,10 @@
      ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
+        <activity
+            android:name="com.IEEE.SCD.news_feed"
+            android:label="@string/title_activity_options"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="com.IEEE.SCD.options"
             android:label="@string/title_activity_options"
@@ -60,14 +64,16 @@
              Note that the API key is linked to the encryption key used to sign the APK.
              You need a different API key for each encryption key, including the release key that is used to
              sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAP8xj_eglnn--_dA43TF0-5ty-2miT9lQ"/>
+            android:value="AIzaSyBWpD7hpHVed3v5CJ87qKSYy_7DHbU5EdE"/>
 
         <activity android:name="com.IEEE.SCD.manage_cases"/>
         <activity android:name="com.IEEE.SCD.main_menu">
+        </activity>
+        <activity android:name="com.IEEE.SCD.case_details">
         </activity>
     </application>
 
