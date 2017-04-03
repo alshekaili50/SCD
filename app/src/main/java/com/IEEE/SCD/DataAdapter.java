@@ -1,13 +1,10 @@
 package com.IEEE.SCD;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,7 +34,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
         public ViewHolder(View v) {
             super(v);
-            text = (TextView) v.findViewById(R.id.text34);
+            text = (TextView) v.findViewById( R.id.text34);
         //    imageView = (ImageView) v.findViewById(R.id.icon);
 
 
