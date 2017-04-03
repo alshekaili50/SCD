@@ -4,9 +4,9 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
 import com.gordonwong.materialsheetfab.MaterialSheetFabEventListener;
 import com.journaldev.loginphpmysql.R;
+
 import java.util.Calendar;
 
 public class main_menu extends AppCompatActivity {
@@ -41,7 +43,7 @@ public class main_menu extends AppCompatActivity {
         setupFab();
         //-------------------------------------------- FAB
 
-        Button manage_cases=(Button)findViewById(R.id.manage_cases);
+        Button manage_cases=(Button)findViewById( R.id.manage_cases);
         manage_cases.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,6 +64,14 @@ public class main_menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(main_menu.this, SCD.class);
+                startActivity(i);
+            }
+        } );
+        Button news_feed=(Button)findViewById(R.id.news_feed);
+        news_feed.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(main_menu.this, news_feed.class);
                 startActivity(i);
             }
         } );

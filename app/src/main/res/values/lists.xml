@@ -24,10 +24,11 @@
         <item>Umm Al Quwain</item>
     </string-array>
     <string-array name="heights">
+        <item></item>
         <item>less than 150cm</item>
         <item>151-165</item>
         <item>166-180</item>
-        <item>grater than 180cm</item>
+        <item>Greater than 180cm</item>
     </string-array>
     <string-array name="skin">
      <item></item>
