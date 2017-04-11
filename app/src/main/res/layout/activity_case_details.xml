@@ -147,10 +147,10 @@
                     android:layout_marginLeft="35dp"
                     android:text="Body type"/>
                 <TextView
-                    android:layout_marginLeft="35dp"
+                    android:layout_marginLeft="70dp"
                     android:text="Height"/>
                 <TextView
-                    android:layout_marginLeft="35dp"
+                    android:layout_marginLeft="105dp"
                     android:text="Skin color"/>
 
 

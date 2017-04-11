@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="65dp"
+            android:divider="@null" />
+
+    </LinearLayout>
+
+
+    <include
+        layout="@layout/app_bar_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <com.IEEE.SCD.Fab
+            android:id="@+id/fab"
+            style="@style/Widget.MaterialSheetFab.Fab"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            app:backgroundTint="@color/colorPrimary"
+            app:rippleColor="@color/background_card"
+            android:layout_width="wrap_content"/>
+
+        <!-- Overlay that dims the screen -->
+        <!-- Circular reveal container for the sheet -->
+
+
+        <com.gordonwong.materialsheetfab.DimOverlayFrameLayout
+            android:id="@+id/overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <io.codetail.widget.RevealLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end|bottom"
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
+
+            <!-- Sheet that contains your items -->
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/fab_sheet"
+                android:layout_width="250dp"
+                android:layout_height="300dp">
+                <!-- Sheet items -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- New_Case -->
+                    <TextView
+                        android:id="@+id/fab_sheet_item_new_case"
+                        style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
+                        android:drawableLeft="@drawable/ic_create_grey600_24dp"
+                        android:drawableStart="@drawable/ic_create_grey600_24dp"
+                        android:text="@string/New_Case" />
+
+                    <!-- New_Evidence -->
+                    <TextView
+                        android:id="@+id/fab_sheet_item_new_evidence"
+                        style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
+                        android:drawableLeft="@drawable/ic_create_grey600_24dp"
+                        android:drawableStart="@drawable/ic_create_grey600_24dp"
+                        android:text="@string/New_Evidence" />
+
+                    <!-- New_Suspect -->
+                    <TextView
+                        android:id="@+id/fab_sheet_item_new_suspect"
+                        style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
+                        android:drawableLeft="@drawable/ic_create_grey600_24dp"
+                        android:drawableStart="@drawable/ic_create_grey600_24dp"
+                        android:text="@string/New_Suspect" />
+
+                    <!-- New_Victim -->
+
+                    <TextView
+                        android:id="@+id/fab_sheet_item_new_victim"
+                        style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
+                        android:drawableLeft="@drawable/ic_create_grey600_24dp"
+                        android:drawableStart="@drawable/ic_create_grey600_24dp"
+                        android:text="@string/New_Victim" />
+
+                </LinearLayout>
+
+                <!-- TODO: Put your sheet items here -->
+
+            </android.support.v7.widget.CardView>
+        </io.codetail.widget.RevealLinearLayout>
+
+
+    </RelativeLayout>
+
+
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_navigation"
+        app:menu="@menu/activity_navigation_drawer"/>
+
+</android.support.v4.widget.DrawerLayout>

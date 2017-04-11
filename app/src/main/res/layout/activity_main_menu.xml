@@ -42,83 +42,13 @@
             android:text="Serial Criminal Detector" />
     </LinearLayout>
 
-    <com.IEEE.SCD.Fab
-        android:id="@+id/fab"
-        style="@style/Widget.MaterialSheetFab.Fab"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        app:backgroundTint="@color/colorPrimary"
-        app:rippleColor="@color/background_card" />
 
-    <!-- Overlay that dims the screen -->
-    <!-- Circular reveal container for the sheet -->
-
-
-    <com.gordonwong.materialsheetfab.DimOverlayFrameLayout
-        android:id="@+id/overlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <io.codetail.widget.RevealLinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="end|bottom"
-        android:orientation="vertical"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
-
-        <!-- Sheet that contains your items -->
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/fab_sheet"
-            android:layout_width="250dp"
-            android:layout_height="300dp">
-            <!-- Sheet items -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <!-- New_Case -->
-                <TextView
-                    android:id="@+id/fab_sheet_item_new_case"
-                    style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
-                    android:drawableLeft="@drawable/ic_create_grey600_24dp"
-                    android:drawableStart="@drawable/ic_create_grey600_24dp"
-                    android:text="@string/New_Case" />
-
-                <!-- New_Evidence -->
-                <TextView
-                    android:id="@+id/fab_sheet_item_new_evidence"
-                    style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
-                    android:drawableLeft="@drawable/ic_create_grey600_24dp"
-                    android:drawableStart="@drawable/ic_create_grey600_24dp"
-                    android:text="@string/New_Evidence" />
-
-                <!-- New_Suspect -->
-                <TextView
-                    android:id="@+id/fab_sheet_item_new_suspect"
-                    style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
-                    android:drawableLeft="@drawable/ic_create_grey600_24dp"
-                    android:drawableStart="@drawable/ic_create_grey600_24dp"
-                    android:text="@string/New_Suspect" />
-
-                <!-- New_Victim -->
-
-                    <TextView
-                        android:id="@+id/fab_sheet_item_new_victim"
-                        style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
-                        android:drawableLeft="@drawable/ic_create_grey600_24dp"
-                        android:drawableStart="@drawable/ic_create_grey600_24dp"
-                        android:text="@string/New_Victim" />
-
-            </LinearLayout>
-
-            <!-- TODO: Put your sheet items here -->
-
-        </android.support.v7.widget.CardView>
-    </io.codetail.widget.RevealLinearLayout>
+    <!-- A property is created with the Property element.
+   For each property, a random number is created.
+   This number is made of two parts that each
+   ranges from 100 to 999.
+   Both parts are separated by a dash.
+ -->
 
     <Button
         android:text="news feed"

@@ -5,14 +5,22 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -26,58 +34,161 @@ import com.android.volley.toolbox.Volley;
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
 import com.gordonwong.materialsheetfab.MaterialSheetFabEventListener;
 
-import java.util.Calendar;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class main_menu extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+public class navigation extends AppCompatActivity
+
+        implements NavigationView.OnNavigationItemSelectedListener {
     private int mYear;
     private int mMonth;
     private int mDay;
     private MaterialSheetFab materialSheetFab;
     private int statusBarColor;
+    private static final String tag = news_feed.class.getSimpleName();
+    private static final String url = "http://scd.net23.net/insert_case.php?set=3";
+    private List<FeedItem> list = new ArrayList<FeedItem>();
+    private ListView listView;
+    private FeedListAdapter adapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_main_menu );
-        //----------------------------------------------FAB
+        setContentView( R.layout.activity_navigation );
+        Toolbar toolbar = (Toolbar) findViewById( R.id.toolbar );
+        setSupportActionBar( toolbar );
+        DrawerLayout drawer = (DrawerLayout) findViewById( R.id.drawer_layout );
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close );
+        drawer.setDrawerListener( toggle );
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
+        navigationView.setNavigationItemSelectedListener( this );
         setupFab();
         //-------------------------------------------- FAB
 
-        Button manage_cases=(Button)findViewById( R.id.manage_cases);
-        manage_cases.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(main_menu.this, manage_cases.class);
-                startActivity(i);
-            }
-        } );
-        Button manage_criminals=(Button)findViewById(R.id.manage_suspects);
-        manage_criminals.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(main_menu.this, manage_criminals.class);
-                startActivity(i);
-            }
-        } );
-        Button scd=(Button)findViewById(R.id.SCD);
-        scd.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(main_menu.this, SCD_feed.class);
-                startActivity(i);
-            }
-        } );
-        Button news_feed=(Button)findViewById(R.id.news_feed);
-        news_feed.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(main_menu.this, news_feed.class);
-                startActivity(i);
-            }
-        } );
+        FloatingActionButton fab = (FloatingActionButton) findViewById( R.id.fab );
+
+        listView = (ListView) findViewById( R.id.list );
+        adapter = new FeedListAdapter( this, list );
+        listView.setAdapter( adapter );
+        getData();
+        //----------------------------------------------FAB
 
 
 
 
+    }
+    void getData(){
+
+        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+
+
+                try {
+                    JSONArray data = new JSONArray(response);
+                    for (int i = 0; i < data.length(); i++) {
+
+                        JSONObject obj = data.getJSONObject(i);
+                        FeedItem dataSet = new FeedItem();
+                        dataSet.setName(obj.getString("name"));
+                        dataSet.setId(obj.getString("id"));
+                        dataSet.setDate(obj.getString("crime_date"));
+                        dataSet.setTime(obj.getString("crime_time"));
+                        dataSet.setUploaded_date(obj.getString("uploaded_date"));
+                        dataSet.setUploaded_time(obj.getString("uploaded_time"));
+                        dataSet.setWeapon(obj.getString("weapon"));
+                        dataSet.setType(obj.getString("crime_type"));
+                        dataSet.setLang(obj.getString("lang"));
+                        dataSet.setLat(obj.getString("lat"));
+                        list.add(dataSet);
+                    } }catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                adapter.notifyDataSetChanged();
+            }},
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(navigation.this,error.getMessage().toString(),Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        requestQueue.add(stringRequest);
+
+
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById( R.id.drawer_layout );
+        if (drawer.isDrawerOpen( GravityCompat.START )) {
+            drawer.closeDrawer( GravityCompat.START );
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate( R.menu.navigation, menu );
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected( item );
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_camera) {
+            Intent i = new Intent(navigation.this, manage_cases.class);
+            startActivity(i);
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+            Intent i = new Intent(navigation.this, manage_criminals.class);
+            startActivity(i);
+
+        } else if (id == R.id.nav_slideshow) {
+            Intent i = new Intent(navigation.this, news_feed.class);
+            startActivity(i);
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById( R.id.drawer_layout );
+        drawer.closeDrawer( GravityCompat.START );
+        return true;
     }
     void add_victim_dialog(){
 
@@ -94,7 +205,7 @@ public class main_menu extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int whichButton) {
                 if(full_name.getText().length()<3)
                 {
-                    Toast.makeText(main_menu.this,"Please enter valid name",Toast.LENGTH_LONG).show();
+                    Toast.makeText(navigation.this,"Please enter valid name",Toast.LENGTH_LONG).show();
 
                 }
                 else{
@@ -158,7 +269,7 @@ public class main_menu extends AppCompatActivity {
                 mMonth = c.get(Calendar.MONTH);
                 mDay = c.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dpd = new DatePickerDialog(main_menu.this,
+                DatePickerDialog dpd = new DatePickerDialog(navigation.this,
                         new DatePickerDialog.OnDateSetListener() {
 
                             @Override
@@ -179,15 +290,15 @@ public class main_menu extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int whichButton) {
                 if(full_name.getText().length()<3)
                 {
-                    Toast.makeText(main_menu.this,"Please enter valid name",Toast.LENGTH_LONG).show();
+                    Toast.makeText(navigation.this,"Please enter valid name",Toast.LENGTH_LONG).show();
 
                 }
                 else if(date_of_suspect.getText().length()<3){
-                    Toast.makeText(main_menu.this,"Please enter valid date",Toast.LENGTH_LONG).show();
+                    Toast.makeText(navigation.this,"Please enter valid date",Toast.LENGTH_LONG).show();
 
                 }
                 else if(!male.isChecked()&&!female.isChecked()){
-                    Toast.makeText(main_menu.this,"Please select gender",Toast.LENGTH_LONG).show();
+                    Toast.makeText(navigation.this,"Please select gender",Toast.LENGTH_LONG).show();
 
                 }
                 else{
@@ -241,7 +352,7 @@ public class main_menu extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int whichButton) {
                 if(detail.getText().length()<10)
                 {
-                    Toast.makeText(main_menu.this,"Please enter valid evidence",Toast.LENGTH_LONG).show();
+                    Toast.makeText(navigation.this,"Please enter valid evidence",Toast.LENGTH_LONG).show();
                 }
                 else{
                     String name;
@@ -274,7 +385,7 @@ public class main_menu extends AppCompatActivity {
             public void onResponse(String response) {
 
                 if(response.length()==5){
-                    Toast.makeText(main_menu.this,response.toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(navigation.this,response.toString(),Toast.LENGTH_LONG).show();
 
                 }
 
@@ -286,7 +397,7 @@ public class main_menu extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(main_menu.this,error.getMessage().toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(navigation.this,error.getMessage().toString(),Toast.LENGTH_LONG).show();
                     }
                 });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -322,7 +433,7 @@ public class main_menu extends AppCompatActivity {
         findViewById(R.id.fab_sheet_item_new_case).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(main_menu.this, add_case.class);
+                Intent i = new Intent(navigation.this, add_case.class);
                 startActivity(i);
             }
         } );
@@ -356,4 +467,6 @@ public class main_menu extends AppCompatActivity {
             getWindow().setStatusBarColor(color);
         }
     }
+
+
 }

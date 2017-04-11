@@ -37,7 +37,6 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
-import com.journaldev.loginphpmysql.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -96,6 +95,7 @@ int PLACE_PICKER_REQUEST=1;
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
+
             }
         });
         date.setOnClickListener(new View.OnClickListener() {
@@ -240,7 +240,7 @@ int PLACE_PICKER_REQUEST=1;
         String id;
         String url = "http://scd.net23.net/insert_case.php?set=1&name=" + name1 + "&date=" + date1 + "&time=" + time1 + "&lat=" + lat+"&lang="+lang;
         url = url.replaceAll(" ", "%20");
-        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+        loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
@@ -394,7 +394,7 @@ save.setOnClickListener( new View.OnClickListener() {
         String type,weapon;
         type=a.getType();
         weapon=a.getWeapon();
-        Toast.makeText(add_case.this,a.getId(),Toast.LENGTH_LONG).show();
+        Toast.makeText(add_case.this,"Case "+a.getId()+ "has been updated successfully",Toast.LENGTH_LONG).show();
 
         String url = "http://scd.net23.net/insert_case.php?set=2&type="+type+"&weapon="+weapon+"&id="+a.getId();
         url = url.replaceAll(" ", "%20");
@@ -621,7 +621,7 @@ witness.setText( "name:"+a.getWit_name()+"\nbody type:"+a.getWit_body()+"\nheigh
     }
     void insert_criminal(String url){
 
-        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+        loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
         StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {
@@ -630,7 +630,7 @@ witness.setText( "name:"+a.getWit_name()+"\nbody type:"+a.getWit_body()+"\nheigh
                 loading.dismiss();
 
                 if(response.length()==5){
-                    Toast.makeText(add_case.this,response.toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(add_case.this,"Suspect "+response.toString()+" has been added successfully",Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -691,7 +691,7 @@ witness.setText( "name:"+a.getWit_name()+"\nbody type:"+a.getWit_body()+"\nheigh
     }
     void insert_victim(String url){
 
-        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+        loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
         StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {
@@ -700,7 +700,7 @@ witness.setText( "name:"+a.getWit_name()+"\nbody type:"+a.getWit_body()+"\nheigh
                 loading.dismiss();
 
                 if(response.length()==5){
-                    Toast.makeText(add_case.this,response.toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(add_case.this,"Victim "+response.toString()+"has been added successfully",Toast.LENGTH_LONG).show();
 
                 }
 
@@ -765,7 +765,7 @@ witness.setText( "name:"+a.getWit_name()+"\nbody type:"+a.getWit_body()+"\nheigh
     }
     void insert_evidence(String url){
 
-        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+        loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
         StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {
@@ -774,7 +774,7 @@ witness.setText( "name:"+a.getWit_name()+"\nbody type:"+a.getWit_body()+"\nheigh
                 loading.dismiss();
 
                 if(response.length()==5){
-                    Toast.makeText(add_case.this,response.toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(add_case.this,"Evidence "+response.toString()+" has been added successfully",Toast.LENGTH_LONG).show();
 
                 }
 
@@ -796,7 +796,7 @@ witness.setText( "name:"+a.getWit_name()+"\nbody type:"+a.getWit_body()+"\nheigh
     void fetch_all_victims(){
         victim_names.clear();
         String url="http://scd.net23.net/victim.php?set=1";
-        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+        loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
         StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {
@@ -889,7 +889,7 @@ a.setVictim( name );
     }
 
     void insert_victim_case(String url){
-        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+        loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
         StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {
@@ -919,7 +919,7 @@ a.setVictim( name );
     void fetch_all_evidences(){
         evidences.clear();
         String url="http://scd.net23.net/evidences.php?set=1";
-        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+        loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
         StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {
@@ -1015,7 +1015,7 @@ a.setVictim( name );
 
     }
     void insert_evidence_Case(String url){
-        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+        loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
         StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {
@@ -1105,7 +1105,7 @@ a.setVictim( name );
 
     }
 void insert_suspect_case(String url){
-    loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+    loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
     StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {
@@ -1113,7 +1113,7 @@ void insert_suspect_case(String url){
         public void onResponse(String response) {
             loading.dismiss();
             if(response.length()==1){
-                Toast.makeText(add_case.this,"information has been inserted successfully",Toast.LENGTH_LONG).show();
+                Toast.makeText(add_case.this,"Information has been inserted successfully",Toast.LENGTH_LONG).show();
             }
 
 
@@ -1313,7 +1313,7 @@ void edit_victims(){
     }
 
     void deleteDb(String url){
-    loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+    loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
     StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {

@@ -21,7 +21,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.journaldev.loginphpmysql.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -289,7 +288,7 @@ public class case_details extends AppCompatActivity implements OnMapReadyCallbac
                         t.setText( j.getString( "name" ));
 
                         t2.setText( j.getString( "suspect_id" ));
-                        t2.setPadding( 450,0,0,0 );
+                        t2.setPadding( 250,0,0,0 );
                         // add the TextView  to the new TableRow
                         row.addView(t);
                         row.addView( t2 );

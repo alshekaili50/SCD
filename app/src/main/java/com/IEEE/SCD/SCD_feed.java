@@ -19,21 +19,23 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class news_feed extends Activity {
+public class SCD_feed extends Activity {
 
     private static final String tag = news_feed.class.getSimpleName();
-    private static final String url = "http://scd.net23.net/insert_case.php?set=3";
-    private List<FeedItem> list = new ArrayList<FeedItem>();
+     String url ;
+    private List<SCD_item> list = new ArrayList<SCD_item>();
     private ListView listView;
-    private FeedListAdapter adapter;
+    private FeedSCDAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_news_feed );
 
+        url=getIntent().getStringExtra( "url" );
+
         listView = (ListView) findViewById( R.id.list );
-        adapter = new FeedListAdapter( this, list );
+        adapter = new FeedSCDAdapter( this, list );
         listView.setAdapter( adapter );
         getData();
 
@@ -51,26 +53,25 @@ public class news_feed extends Activity {
 
 
 
-                    try {
-                        JSONArray data = new JSONArray(response);
-                        for (int i = 0; i < data.length(); i++) {
+                try {
+                    JSONArray data = new JSONArray(response);
+                    for (int i = 0; i < data.length(); i++) {
 
                         JSONObject obj = data.getJSONObject(i);
-                        FeedItem dataSet = new FeedItem();
-                        dataSet.setName(obj.getString("name"));
-                        dataSet.setId(obj.getString("id"));
-                        dataSet.setDate(obj.getString("crime_date"));
-                        dataSet.setTime(obj.getString("crime_time"));
-                        dataSet.setUploaded_date(obj.getString("uploaded_date"));
-                        dataSet.setUploaded_time(obj.getString("uploaded_time"));
-                        dataSet.setWeapon(obj.getString("weapon"));
-                        dataSet.setType(obj.getString("crime_type"));
-                        dataSet.setLang(obj.getString("lang"));
-                        dataSet.setLat(obj.getString("lat"));
+                        SCD_item dataSet = new SCD_item();
+                        dataSet.setSuspect_id(obj.getString("suspect_id"));
+                        dataSet.setCase_id(obj.getString("case_reference"));
+                        dataSet.setAvg_evidence(obj.getString("avg_evidence"));
+                        dataSet.setAvg_location(obj.getString("avg_location"));
+                        dataSet.setAvg_type(obj.getString("avg_type"));
+                        dataSet.setAvg_victims(obj.getString("avg_victim"));
+                        dataSet.setAvg_weapon(obj.getString("avg_weapon"));
+                        dataSet.setAvg_witness(obj.getString("avg_witness"));
+                        dataSet.setOverall(obj.getString("overall_weight"));
                         list.add(dataSet);
                     } }catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    e.printStackTrace();
+                }
 
 
                 adapter.notifyDataSetChanged();
@@ -78,7 +79,7 @@ public class news_feed extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(news_feed.this,error.getMessage().toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(SCD_feed.this,error.getMessage().toString(),Toast.LENGTH_LONG).show();
                     }
                 });
 

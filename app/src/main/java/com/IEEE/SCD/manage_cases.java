@@ -1,12 +1,13 @@
 package com.IEEE.SCD;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
-
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -32,7 +33,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.journaldev.loginphpmysql.R;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -58,7 +58,7 @@ import java.util.List;
 public class manage_cases extends AppCompatActivity {
     int x=1;
     ArrayList<HashMap<String, String>> MyArrList;
-    String[] Cmd = {"View","Update","Delete"};
+    String[] Cmd = {"View","Update","Serial criminal detector","Generate case report"};
      ListView lisView1;
     @SuppressLint("NewApi")
     @Override
@@ -136,9 +136,31 @@ show( url );
         // Check Event Command
         if ("View".equals(CmdName)) {
             initiatePopupWindow(info);
-            /**
-             * Call the mthod
-             */
+
+            String sMemberID = MyArrList.get(info.position).get("id").toString();
+            Intent intent = new Intent(this, case_details.class);
+
+
+            intent.putExtra("id", MyArrList.get(info.position).get( "id" ));
+            intent.putExtra("weapon", MyArrList.get(info.position).get( "weapon" ));
+            intent.putExtra("type", MyArrList.get(info.position).get( "crime_type" ));
+
+
+
+
+            intent.putExtra("name", MyArrList.get(info.position).get( "name" ));
+            intent.putExtra("date",  MyArrList.get(info.position).get( "crime_date" ));
+            intent.putExtra("lang",  MyArrList.get(info.position).get( "lang" ));
+            intent.putExtra("lat", MyArrList.get(info.position).get( "lat" ));
+            intent.putExtra("time",  MyArrList.get(info.position).get( "crime_time" ));
+         //   intent.putExtra("uploaded_date", MyArrList.get(info.position).get( "uploaded_date" ));
+       //     intent.putExtra("uploaded_time",  MyArrList.get(info.position).get( "uploaded_time" ));
+
+
+
+
+            startActivity(intent);
+
         } else if ("Update".equals(CmdName)) {
             Toast.makeText(manage_cases.this,"Your Selected Update",Toast.LENGTH_LONG).show();
 
@@ -157,11 +179,27 @@ show( url );
 
             startActivity(intent);
 
-        } else if ("Delete".equals(CmdName)) {
-            Toast.makeText(manage_cases.this,"Your Selected Delete",Toast.LENGTH_LONG).show();
-            /**
-             * Call the mthod
-             */
+        } else if ("Generate case report".equals(CmdName)) {
+            Toast.makeText(manage_cases.this,"Your Selected Generate case report",Toast.LENGTH_LONG).show();
+            String urlString="http://scd.net23.net/pdf/report_generator.php?case_id="+MyArrList.get(info.position).get( "id");
+            Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setPackage("com.android.chrome");
+            try {
+               startActivity(intent);
+            } catch (ActivityNotFoundException ex) {
+                // Chrome browser presumably not installed so allow user to choose instead
+                intent.setPackage(null);
+                startActivity(intent);
+            }}
+             else if ("Serial criminal detector".equals(CmdName)) {
+              //  Toast.makeText(manage_cases.this,"Your Selected Generate case report",Toast.LENGTH_LONG).show();
+                String urlString="http://scd.net23.net/SCD.php?case_id="+MyArrList.get(info.position).get( "id");
+                Intent intent = new Intent(this, SCD_feed.class);
+                intent.putExtra("url", urlString);
+                startActivity(intent);
+
+
         }
         return true;
     }
@@ -351,61 +389,54 @@ show( url );
         try {
 // We need to get the instance of the LayoutInflater
             LayoutInflater inflater = (LayoutInflater) manage_cases.this
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View layout = inflater.inflate(R.layout.view_case,
-                    (ViewGroup) findViewById(R.id.popup_element));
-            TextView text1=(TextView)layout.findViewById( R.id.textId );
-            TextView text2=(TextView)layout.findViewById( R.id.textName );
-            TextView text3=(TextView)layout.findViewById( R.id.textDate );
-            TextView text4=(TextView)layout.findViewById( R.id.textTime );
-            TextView text5=(TextView)layout.findViewById( R.id.textLocation );
-            TextView text6=(TextView)layout.findViewById( R.id.textType );
-            TextView text7=(TextView)layout.findViewById( R.id.textVictims );
-            TextView text8=(TextView)layout.findViewById( R.id.textSus );
-            TextView text9=(TextView)layout.findViewById( R.id.textEvidence );
+                    .getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+            View layout = inflater.inflate( R.layout.view_case,
+                    (ViewGroup) findViewById( R.id.popup_element ) );
+            TextView text1 = (TextView) layout.findViewById( R.id.textId );
+            TextView text2 = (TextView) layout.findViewById( R.id.textName );
+            TextView text3 = (TextView) layout.findViewById( R.id.textDate );
+            TextView text4 = (TextView) layout.findViewById( R.id.textTime );
+            TextView text5 = (TextView) layout.findViewById( R.id.textLocation );
+            TextView text6 = (TextView) layout.findViewById( R.id.textType );
+            TextView text7 = (TextView) layout.findViewById( R.id.textVictims );
+            TextView text8 = (TextView) layout.findViewById( R.id.textSus );
+            TextView text9 = (TextView) layout.findViewById( R.id.textEvidence );
 
-            text1.setText( "ID: "+MyArrList.get(info.position).get("id").toString());
-            text2.setText( "Name: "+MyArrList.get(info.position).get("name").toString());
-            text3.setText( "Crime date: "+MyArrList.get(info.position).get("crime_date").toString());
-            text4.setText( "Crime time: "+MyArrList.get(info.position).get("crime_time").toString());
-            text5.setText( "Latitude: "+MyArrList.get(info.position).get("lat").toString()+ " Longitude:"+MyArrList.get(info.position).get("lang").toString());
-            text6.setText( "Crime type: "+MyArrList.get(info.position).get("crime_type").toString());
-            String [] vics={MyArrList.get(info.position).get("victim1").toString(),MyArrList.get(info.position).get("victim2").toString(),
-                    MyArrList.get(info.position).get("victim3").toString(),MyArrList.get(info.position).get("victim4").toString(),
-                    MyArrList.get(info.position).get("victim5").toString()};
-            String v="";
-            for(int i=0;i<5;i++){
-                if(vics[i].length()>4){
-                    v=v+vics[i]+",";
-                    text7.setText( "Victims: "+v);
+            text1.setText( "ID: " + MyArrList.get( info.position ).get( "id" ).toString() );
+            text2.setText( "Name: " + MyArrList.get( info.position ).get( "name" ).toString() );
+            text3.setText( "Crime date: " + MyArrList.get( info.position ).get( "crime_date" ).toString() );
+            text4.setText( "Crime time: " + MyArrList.get( info.position ).get( "crime_time" ).toString() );
+            text5.setText( "Latitude: " + MyArrList.get( info.position ).get( "lat" ).toString() + " Longitude:" + MyArrList.get( info.position ).get( "lang" ).toString() );
+            text6.setText( "Crime type: " + MyArrList.get( info.position ).get( "crime_type" ).toString() );
+            String[] vics = {MyArrList.get( info.position ).get( "victim1" ).toString(), MyArrList.get( info.position ).get( "victim2" ).toString(),
+                    MyArrList.get( info.position ).get( "victim3" ).toString(), MyArrList.get( info.position ).get( "victim4" ).toString(),
+                    MyArrList.get( info.position ).get( "victim5" ).toString()};
+            String v = "";
+            for (int i = 0; i < 5; i++) {
+                if (vics[i].length() > 4) {
+                    v = v + vics[i] + ",";
+                    text7.setText( "Victims: " + v );
                 }
             }
-            String [] sus={MyArrList.get(info.position).get("suspect1").toString(),MyArrList.get(info.position).get("suspect2").toString(),
-                    MyArrList.get(info.position).get("suspect3").toString(),MyArrList.get(info.position).get("suspect4").toString(),
-                    MyArrList.get(info.position).get("suspect5").toString()};
-            String s="";
-            for(int i=0;i<5;i++){
-                if(sus[i].length()==5){
-                    s=s+sus[i]+",";
-                    text8.setText( "Suspects: "+s);
+            String[] sus = {MyArrList.get( info.position ).get( "suspect1" ).toString(), MyArrList.get( info.position ).get( "suspect2" ).toString(),
+                    MyArrList.get( info.position ).get( "suspect3" ).toString(), MyArrList.get( info.position ).get( "suspect4" ).toString(),
+                    MyArrList.get( info.position ).get( "suspect5" ).toString()};
+            String s = "";
+            for (int i = 0; i < 5; i++) {
+                if (sus[i].length() == 5) {
+                    s = s + sus[i] + ",";
+                    text8.setText( "Suspects: " + s );
                 }
             }
-            text9.setText( "Evidences: "+MyArrList.get(info.position).get("evidence").toString());
-            PopupWindow popupMenu = new PopupWindow(layout, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+            text9.setText( "Evidences: " + MyArrList.get( info.position ).get( "evidence" ).toString() );
+            PopupWindow popupMenu = new PopupWindow( layout, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true );
 
             //    pwindo = new PopupWindow(layout, 400, 600, true);
-            popupMenu.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            popupMenu.showAtLocation( layout, Gravity.CENTER, 0, 0 );
 
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }}
 
-
-
-
-
-
-
-}
