@@ -56,4 +56,6 @@ dependencies {
     compile 'com.github.dmytrodanylyk:android-morphing-button:98a4986e56'
     compile 'com.gordonwong:material-sheet-fab:1.2.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:support-v4:24.0.+'
+
 }
