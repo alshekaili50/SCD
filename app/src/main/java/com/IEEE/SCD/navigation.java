@@ -408,8 +408,8 @@ public class navigation extends AppCompatActivity
         Fab fab = (Fab) findViewById(R.id.fab);
         View sheetView = findViewById(R.id.fab_sheet);
         View overlay = findViewById(R.id.overlay);
-        int sheetColor = getResources().getColor(R.color.background_card);
-        int fabColor = getResources().getColor(R.color.theme_accent);
+        int sheetColor = getResources().getColor(R.color.colorPrimaryDark);
+        int fabColor = getResources().getColor(R.color.colorPrimary);
 
         // Create material sheet FAB
         materialSheetFab = new MaterialSheetFab<>(fab, sheetView, overlay, sheetColor, fabColor);

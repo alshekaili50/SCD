@@ -2,6 +2,7 @@ package com.IEEE.SCD;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,7 +20,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SCD_feed extends Activity {
+public class SCD_feed extends AppCompatActivity {
 
     private static final String tag = news_feed.class.getSimpleName();
      String url ;

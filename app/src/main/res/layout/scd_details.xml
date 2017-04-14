@@ -12,7 +12,7 @@
                     android:layout_height="match_parent">
         <TextView
             android:textSize="40dp"
-            android:textColor="@color/mb_green_dark"
+            android:textColor="@color/text_black_87"
             android:background="@drawable/border"
             android:id="@+id/avg_location"
             android:layout_width="300dp"
@@ -23,7 +23,7 @@
             android:layout_centerHorizontal="true"
 
             android:textSize="40dp"
-            android:textColor="@color/mb_green_dark"
+            android:textColor="@color/text_black_87"
             android:background="@drawable/border"
             android:id="@+id/avg_type"
             android:layout_width="300dp"
@@ -35,7 +35,7 @@
             android:layout_centerHorizontal="true"
 
             android:textSize="40dp"
-            android:textColor="@color/mb_green_dark"
+            android:textColor="@color/text_black_87"
             android:background="@drawable/border"
             android:layout_marginTop="50dp"
             android:layout_below="@+id/avg_type"
@@ -47,7 +47,7 @@
             android:layout_centerHorizontal="true"
 
             android:textSize="40dp"
-            android:textColor="@color/mb_green_dark"
+            android:textColor="@color/text_black_87"
             android:background="@drawable/border"
             android:id="@+id/avg_victims"
             android:layout_width="300dp"
@@ -60,7 +60,7 @@
             android:layout_centerHorizontal="true"
 
             android:textSize="40dp"
-            android:textColor="@color/mb_green_dark"
+            android:textColor="@color/text_black_87"
             android:background="@drawable/border"
             android:id="@+id/avg_evidences"
             android:layout_width="300dp"
@@ -72,7 +72,7 @@
             android:layout_centerHorizontal="true"
 
             android:textSize="40dp"
-            android:textColor="@color/mb_green_dark"
+            android:textColor="@color/text_black_87"
             android:background="@drawable/border"
             android:id="@+id/avg_witness"
             android:layout_width="300dp"
@@ -84,7 +84,7 @@
             android:layout_centerHorizontal="true"
 
             android:textSize="40dp"
-            android:textColor="@color/mb_green_dark"
+            android:textColor="@color/text_black_87"
             android:background="@drawable/border"
             android:id="@+id/avg_overall"
             android:layout_width="300dp"

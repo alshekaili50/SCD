@@ -10,9 +10,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_margin="@dimen/card_margin"
-        android:background="@color/holo_green_light"
+        android:background="@color/colorPrimary"
         android:elevation="3dp"
-        card_view:cardBackgroundColor="@android:color/holo_green_light"
+        card_view:cardBackgroundColor="@color/colorPrimaryDark"
         card_view:cardCornerRadius="@dimen/card_album_radius">
 
         <RelativeLayout

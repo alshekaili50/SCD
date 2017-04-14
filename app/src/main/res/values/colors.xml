@@ -3,24 +3,22 @@
 
     <color name="text_white_87">#deFFFFFF</color>
     <color name="text_black_87">#de000000</color>
-
-
     <color name="colorPrimary">#009688</color>
     <color name="colorPrimaryDark">#00796B</color>
     <color name="colorAccent">#8BC34A</color>
     <color name="bg_login">#baeee2</color>
-        <color name="bg_register">#2e3237</color>
-        <color name="bg_main">#e2eff8</color>
-        <color name="white">#ffffff</color>
-        <color name="input_login">#222222</color>
-        <color name="input_login_hint">#999999</color>
-        <color name="input_register">#888888</color>
-        <color name="input_register_bg">#3b4148</color>
-        <color name="input_register_hint">#5e6266</color>
-        <color name="btn_login">#30ebc9</color>
-        <color name="btn_login_bg">#daf8f5</color>
-        <color name="lbl_name">#333333</color>
-        <color name="btn_logut_bg">#ebaba8</color>
+    <color name="bg_register">#2e3237</color>
+    <color name="bg_main">#e2eff8</color>
+    <color name="white">#ffffff</color>
+    <color name="input_login">#222222</color>
+    <color name="input_login_hint">#999999</color>
+    <color name="input_register">#888888</color>
+    <color name="input_register_bg">#3b4148</color>
+    <color name="input_register_hint">#5e6266</color>
+    <color name="btn_login">#30ebc9</color>
+    <color name="btn_login_bg">#daf8f5</color>
+    <color name="lbl_name">#333333</color>
+    <color name="btn_logut_bg">#ebaba8</color>
     <color name="mb_white">#ffffff</color>
     <color name="mb_blue">#ff0099cc</color>
     <color name="mb_blue_dark">#ff00719b</color>
@@ -45,7 +43,6 @@
     <dimen name="mb_height_4">4dp</dimen>
     <integer name="mb_animation">250</integer>
     <string name="mb_button">SIGN IN</string>
-
     <color name="viewBg">#f1f5f8</color>
     <color name="album_title">#4c4c4c</color>
     <color name="theme_accent">#FFEB3B</color>

@@ -7,14 +7,6 @@
      android:orientation="vertical"
                 android:padding="10sp" >
 
-
-
-
-
-
-
-
-
     <TextView
         android:id="@+id/textId"
         android:layout_width="fill_parent"

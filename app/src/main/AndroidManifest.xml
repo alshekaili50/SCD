@@ -38,37 +38,23 @@
      ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->        <activity
-        android:name=".SCD_details"
-        android:label="@string/title_activity_options"
-        android:theme="@style/AppTheme.NoActionBar"/>
-
+        android:name=".SCD_details"/>
         <activity
-            android:name=".SCD_feed"
-            android:label="@string/title_activity_options"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:name=".SCD_feed"/>
         <activity
-            android:name=".news_feed"
-            android:label="@string/title_activity_options"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:name=".news_feed"/>
         <activity
-            android:name=".options"
-            android:label="@string/title_activity_options"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:name=".options"/>
         <activity
-            android:name=".SCD"
-            android:label="@string/title_activity_options"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:name=".SCD"/>
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
         <activity
-            android:name=".add_case"
-            android:label="@string/title_activity_options"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:name=".add_case"/>
         <activity android:name=".Update_Case"/>
         <activity android:name=".manage_criminals"/>
-        <activity android:name=".update_criminal"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
