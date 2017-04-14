@@ -54,7 +54,8 @@
                       android:layout_height="wrap_content"
                       android:layout_marginTop="5dip"
                       android:singleLine="true"
-                      android:layout_marginBottom="20dip"/>
+                      android:layout_marginBottom="20dip"
+                      android:nextFocusDown="@+id/male"/>
             <!--  Email Label -->
             <TextView android:layout_width="fill_parent"
                       android:layout_height="wrap_content"
@@ -64,11 +65,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <RadioButton
+                    android:nextFocusDown="@+id/female"
                     android:text="Male"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/male" />
                 <RadioButton
+                    android:nextFocusDown="@+id/dob"
                     android:text="Female"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -82,6 +85,7 @@
                       android:text="Date of birth *"/>
 
             <EditText android:id="@+id/dob"
+                      android:nextFocusDown="@+id/body"
                       android:layout_width="fill_parent"
                       android:layout_height="wrap_content"
                       android:focusable="false"
@@ -95,6 +99,7 @@
                       android:textColor="#372c24"
                       android:text="Body type"/>
             <Spinner
+                android:nextFocusDown="@+id/skin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/body">
@@ -105,6 +110,7 @@
                       android:textColor="#372c24"
                       android:text="Skin color"/>
             <Spinner
+                android:nextFocusDown="@+id/height"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/skin">
