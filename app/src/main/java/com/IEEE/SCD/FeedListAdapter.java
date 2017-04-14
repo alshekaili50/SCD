@@ -10,8 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.journaldev.loginphpmysql.R;
-
 import java.util.List;
 
 /**
@@ -62,6 +60,8 @@ public class FeedListAdapter extends BaseAdapter {
         TextView time = (TextView) convertView.findViewById(R.id.time_feed);
         ImageView image=(ImageView)convertView.findViewById( R.id.thumbnail ) ;
         TextView header = (TextView) convertView.findViewById(R.id.count);
+        TextView id = (TextView) convertView.findViewById(R.id.case_name_feed);
+
 
         //  TextView time = (TextView) convertView.findViewById(R.id.timestamp);
         TextView name = (TextView) convertView.findViewById(R.id.title);
@@ -102,7 +102,9 @@ public class FeedListAdapter extends BaseAdapter {
         else if(m.getType().equals( "" )){
             image.setImageResource( R.mipmap.ic_dice );
         }
-   time.setText(m.getUploaded_date()+"  "+m.getUploaded_time()+" GMT");
+        id.setText( m.getName() +"   "+m.getId() );
+
+        time.setText(m.getUploaded_date()+"  "+m.getUploaded_time()+" GMT");
         header.setText( "A new case has been added in "+m.getUploaded_date()+" " );
       //  id.setText( m.getId() );
        // image.setImageResource( R.drawable.ic );

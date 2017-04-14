@@ -25,7 +25,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
 import com.gordonwong.materialsheetfab.MaterialSheetFabEventListener;
-import com.journaldev.loginphpmysql.R;
 
 import java.util.Calendar;
 
@@ -63,7 +62,7 @@ public class main_menu extends AppCompatActivity {
         scd.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(main_menu.this, SCD.class);
+                Intent i = new Intent(main_menu.this, SCD_feed.class);
                 startActivity(i);
             }
         } );

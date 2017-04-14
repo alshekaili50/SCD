@@ -21,7 +21,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.journaldev.loginphpmysql.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -153,16 +152,22 @@ public class case_details extends AppCompatActivity implements OnMapReadyCallbac
                         TextView t3 = new TextView(case_details.this);
                         TextView t4 = new TextView(case_details.this);
                         // set the text to "text xx"
-                        t.setText( j.getString( "name" ));
 
                         t2.setText( j.getString( "body_type" ));
-                        t2.setPadding( 130,0,0,0 );
+                        t2.setPadding( 0,0,0,0 );
+                        int padding_in_dp = 50;  // 6 dps
+                         float scale = getResources().getDisplayMetrics().density;
+                        int padding_in_px = (int) (padding_in_dp * scale + 0.5f);
                         t3.setText( j.getString( "height" ));
-                        t3.setPadding( 130,0,0,0 );
+                        t3.setPadding( padding_in_px,0,0,0 );
+                         padding_in_dp = 60;  // 6 dps
+                         scale = getResources().getDisplayMetrics().density;
+                         padding_in_px = (int) (padding_in_dp * scale + 0.5f);
+
                         t4.setText( j.getString( "skin_color" ));
-                        t4.setPadding( 100,0,0,0 );
+                        t4.setPadding( padding_in_px,0,0,0 );
                         // add the TextView  to the new TableRow
-                        row.addView(t);
+                        
                         row.addView( t2 );
 
                         row.addView(t3);
@@ -224,9 +229,11 @@ public class case_details extends AppCompatActivity implements OnMapReadyCallbac
                         TextView t2 = new TextView(case_details.this);
                         // set the text to "text xx"
                         t.setText( j.getString( "name" ));
-
+                        int padding_in_dp = 150;  // 6 dps
+                        final float scale = getResources().getDisplayMetrics().density;
+                        int padding_in_px = (int) (padding_in_dp * scale + 0.5f);
                         t2.setText( j.getString( "victim_id" ));
-                        t2.setPadding( 450,0,0,0 );
+                        t2.setPadding( padding_in_px,0,0,0 );
                         // add the TextView  to the new TableRow
                         row.addView(t);
                         row.addView( t2 );
@@ -279,7 +286,6 @@ public class case_details extends AppCompatActivity implements OnMapReadyCallbac
                     for (int i = 0; i < json.length(); i++) {
                         j = json.getJSONObject( i );
 
-
                         // create a new TableRow
                         TableRow row = new TableRow(case_details.this);
                         // create a new TextView for showing xml data
@@ -287,9 +293,11 @@ public class case_details extends AppCompatActivity implements OnMapReadyCallbac
                         TextView t2 = new TextView(case_details.this);
                         // set the text to "text xx"
                         t.setText( j.getString( "name" ));
-
+                        int padding_in_dp = 150;  // 6 dps
+                        final float scale = getResources().getDisplayMetrics().density;
+                        int padding_in_px = (int) (padding_in_dp * scale + 0.5f);
                         t2.setText( j.getString( "suspect_id" ));
-                        t2.setPadding( 450,0,0,0 );
+                        t2.setPadding( padding_in_px,0,0,0 );
                         // add the TextView  to the new TableRow
                         row.addView(t);
                         row.addView( t2 );
@@ -354,9 +362,12 @@ public class case_details extends AppCompatActivity implements OnMapReadyCallbac
                         TextView t2 = new TextView(case_details.this);
                         // set the text to "text xx"
                         t.setText( j.getString( "detail" ));
+                        int padding_in_dp = 150;  // 6 dps
+                        final float scale = getResources().getDisplayMetrics().density;
+                        int padding_in_px = (int) (padding_in_dp * scale + 0.5f);
 
                         t2.setText( j.getString( "evidence_id" ));
-                        t2.setPadding( 450,0,0,0 );
+                        t2.setPadding( padding_in_px,0,0,0 );
                         // add the TextView  to the new TableRow
                         row.addView(t);
                         row.addView( t2 );

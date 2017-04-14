@@ -37,7 +37,7 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
-import com.journaldev.loginphpmysql.R;
+import com.gordonwong.materialsheetfab.MaterialSheetFab;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,6 +70,9 @@ int PLACE_PICKER_REQUEST=1;
      MultiAutoCompleteTextView evidence1;
      Spinner spinner;
      Spinner weapon;
+    private MaterialSheetFab materialSheetFab;
+    private int statusBarColor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -78,7 +81,13 @@ int PLACE_PICKER_REQUEST=1;
         date = (EditText) findViewById( R.id.case_date );
         time = (EditText) findViewById( R.id.time );
         location = (EditText) findViewById( R.id.location );
-        add = (Button) findViewById( R.id.add_case );
+
+
+
+
+
+
+            add = (Button) findViewById( R.id.add_case );
         time.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -96,6 +105,7 @@ int PLACE_PICKER_REQUEST=1;
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
+
             }
         });
         date.setOnClickListener(new View.OnClickListener() {
@@ -156,6 +166,9 @@ int PLACE_PICKER_REQUEST=1;
             }
         } );
     }
+
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
@@ -240,7 +253,7 @@ int PLACE_PICKER_REQUEST=1;
         String id;
         String url = "http://scd.net23.net/insert_case.php?set=1&name=" + name1 + "&date=" + date1 + "&time=" + time1 + "&lat=" + lat+"&lang="+lang;
         url = url.replaceAll(" ", "%20");
-        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+        loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
@@ -259,6 +272,8 @@ int PLACE_PICKER_REQUEST=1;
                         d.setOnClickListener( new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                Intent i = new Intent(add_case.this, manage_cases.class);
+                                startActivity(i);
                             }
                         } );
                         c.setOnClickListener( new View.OnClickListener() {
@@ -373,6 +388,16 @@ int PLACE_PICKER_REQUEST=1;
             }
         } );
         Button save = (Button) findViewById( R.id.Save );
+        Button cancel = (Button) findViewById( R.id.cancel_case );
+        cancel.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(add_case.this, manage_cases.class);
+                finish();
+                add_case.this.startActivity(myIntent);
+
+            }
+        } );
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource( this,
                 R.array.type_of_crimes, android.R.layout.simple_spinner_item );
 // Specify the layout to use when the list of choices appears
@@ -394,13 +419,17 @@ save.setOnClickListener( new View.OnClickListener() {
         String type,weapon;
         type=a.getType();
         weapon=a.getWeapon();
-        Toast.makeText(add_case.this,a.getId(),Toast.LENGTH_LONG).show();
+        Toast.makeText(add_case.this,"Case "+a.getId()+ "has been updated successfully",Toast.LENGTH_LONG).show();
 
         String url = "http://scd.net23.net/insert_case.php?set=2&type="+type+"&weapon="+weapon+"&id="+a.getId();
         url = url.replaceAll(" ", "%20");
         insert_suspect_case( url );
-        Intent myIntent = new Intent(add_case.this, SCD.class);
-        myIntent.putExtra("key", a.getId()); //Optional parameters
+        String urlString="http://scd.net23.net/SCD.php?case_id="+a.getId();
+        Intent myIntent = new Intent(add_case.this, SCD_feed.class);
+        myIntent.putExtra("url", urlString); //Optional parameters
+        finish();  //Kill the activity from which you will go to next activity
+
+
         add_case.this.startActivity(myIntent);
 
 
@@ -621,7 +650,7 @@ witness.setText( "name:"+a.getWit_name()+"\nbody type:"+a.getWit_body()+"\nheigh
     }
     void insert_criminal(String url){
 
-        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+        loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
         StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {
@@ -630,7 +659,7 @@ witness.setText( "name:"+a.getWit_name()+"\nbody type:"+a.getWit_body()+"\nheigh
                 loading.dismiss();
 
                 if(response.length()==5){
-                    Toast.makeText(add_case.this,response.toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(add_case.this,"Suspect "+response.toString()+" has been added successfully",Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -691,7 +720,7 @@ witness.setText( "name:"+a.getWit_name()+"\nbody type:"+a.getWit_body()+"\nheigh
     }
     void insert_victim(String url){
 
-        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+        loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
         StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {
@@ -700,7 +729,7 @@ witness.setText( "name:"+a.getWit_name()+"\nbody type:"+a.getWit_body()+"\nheigh
                 loading.dismiss();
 
                 if(response.length()==5){
-                    Toast.makeText(add_case.this,response.toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(add_case.this,"Victim "+response.toString()+"has been added successfully",Toast.LENGTH_LONG).show();
 
                 }
 
@@ -765,7 +794,7 @@ witness.setText( "name:"+a.getWit_name()+"\nbody type:"+a.getWit_body()+"\nheigh
     }
     void insert_evidence(String url){
 
-        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+        loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
         StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {
@@ -774,7 +803,7 @@ witness.setText( "name:"+a.getWit_name()+"\nbody type:"+a.getWit_body()+"\nheigh
                 loading.dismiss();
 
                 if(response.length()==5){
-                    Toast.makeText(add_case.this,response.toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(add_case.this,"Evidence "+response.toString()+" has been added successfully",Toast.LENGTH_LONG).show();
 
                 }
 
@@ -796,7 +825,7 @@ witness.setText( "name:"+a.getWit_name()+"\nbody type:"+a.getWit_body()+"\nheigh
     void fetch_all_victims(){
         victim_names.clear();
         String url="http://scd.net23.net/victim.php?set=1";
-        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+        loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
         StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {
@@ -889,7 +918,7 @@ a.setVictim( name );
     }
 
     void insert_victim_case(String url){
-        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+        loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
         StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {
@@ -919,7 +948,7 @@ a.setVictim( name );
     void fetch_all_evidences(){
         evidences.clear();
         String url="http://scd.net23.net/evidences.php?set=1";
-        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+        loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
         StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {
@@ -1015,7 +1044,7 @@ a.setVictim( name );
 
     }
     void insert_evidence_Case(String url){
-        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+        loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
         StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {
@@ -1105,7 +1134,7 @@ a.setVictim( name );
 
     }
 void insert_suspect_case(String url){
-    loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+    loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
     StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {
@@ -1113,7 +1142,7 @@ void insert_suspect_case(String url){
         public void onResponse(String response) {
             loading.dismiss();
             if(response.length()==1){
-                Toast.makeText(add_case.this,"information has been inserted successfully",Toast.LENGTH_LONG).show();
+                Toast.makeText(add_case.this,"Information has been inserted successfully",Toast.LENGTH_LONG).show();
             }
 
 
@@ -1313,7 +1342,7 @@ void edit_victims(){
     }
 
     void deleteDb(String url){
-    loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+    loading = ProgressDialog.show(this,"Please wait...","Contacting the server...",false,false);
 
 
     StringRequest stringRequest = new StringRequest( Request.Method.GET,url ,new Response.Listener<String>() {

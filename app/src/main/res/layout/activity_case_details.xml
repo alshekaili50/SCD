@@ -139,18 +139,16 @@
                 android:layout_height="wrap_content"
                 >
                 <!-- first column -->
-                <TextView
-                    android:text="Witness name"/>
+
                 <!-- second column -->
                 <!-- third column -->
                 <TextView
-                    android:layout_marginLeft="35dp"
                     android:text="Body type"/>
                 <TextView
-                    android:layout_marginLeft="35dp"
+                    android:layout_marginLeft="50dp"
                     android:text="Height"/>
                 <TextView
-                    android:layout_marginLeft="35dp"
+                    android:layout_marginLeft="60dp"
                     android:text="Skin color"/>
 
 

@@ -193,9 +193,6 @@
 
                 />
             </LinearLayout>
-            <Switch
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
             <!-- Register Button -->
             <Button android:id="@+id/Save"
@@ -212,6 +209,14 @@
 
         </LinearLayout>
 
+
+
+
         <!-- Registration Form Ends -->
     </RelativeLayout>
+
+
+
+
+
 </ScrollView>

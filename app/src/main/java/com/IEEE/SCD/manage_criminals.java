@@ -1,12 +1,10 @@
 package com.IEEE.SCD;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -33,36 +31,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.journaldev.loginphpmysql.R;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.StatusLine;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 
 public class manage_criminals extends AppCompatActivity {
     private ProgressDialog loading;
@@ -73,7 +55,7 @@ public class manage_criminals extends AppCompatActivity {
     suspect s;
     int x=1;
     ArrayList<HashMap<String, String>> MyArrList;
-    String[] Cmd = {"View","Update","Delete"};
+    String[] Cmd = {"View","Update"};
      ListView lisView1;
 
 LayoutInflater layout1;
@@ -83,6 +65,13 @@ LayoutInflater layout1;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manage_criminals);
          lisView1 = (ListView)findViewById(R.id.listView1);
+        lisView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                view.setBackgroundColor(0x0000FF00);
+            }
+        });
+
 
 
         ShowData();
@@ -147,6 +136,7 @@ show( url );
         // Check Event Command
         if ("View".equals(CmdName)) {
             initiatePopupWindow(info);
+            view_suspect_dialog( MyArrList,info.position );
         }
 
 
@@ -159,11 +149,6 @@ show( url );
             show_suspect_dialog(MyArrList,info.position);
 
 
-        } else if ("Delete".equals(CmdName)) {
-            Toast.makeText(manage_criminals.this,"Your Selected Delete",Toast.LENGTH_LONG).show();
-            /**
-             * Call the mthod
-             */
         }
         return true;
     }
@@ -518,6 +503,97 @@ void fetch_suspect_info(String id){
         b.show();
 
     }
+
+    void view_suspect_dialog(final ArrayList<HashMap<String, String>> Myarraylist, final int pos){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.new_suspect, null);
+        dialogBuilder.setView(dialogView);
+        final EditText full_name = (EditText) dialogView.findViewById(R.id.fullname);
+        full_name.setText(Myarraylist.get( pos ).get( "name" ).toString());
+
+        final EditText date_of_suspect = (EditText) dialogView.findViewById( R.id.dob );
+        final RadioButton male = (RadioButton) dialogView.findViewById(R.id.male);
+        final RadioButton female = (RadioButton) dialogView.findViewById(R.id.female);
+        final EditText height=(EditText)dialogView.findViewById( R.id.height );
+        final Spinner body_type=(Spinner)dialogView.findViewById( R.id.body );
+        final Spinner sking=(Spinner)dialogView.findViewById( R.id.skin );
+        date_of_suspect.setText(Myarraylist.get( pos ).get( "dob" ).toString() );
+        height.setText( Myarraylist.get( pos ).get( "height" ).toString( ));
+        String c=Myarraylist.get( pos ).get( "sex" ).toString( );
+        if(c.equalsIgnoreCase( "male" )){
+            male.setChecked( true );
+
+        }else if(c.equalsIgnoreCase(  "female")){
+            female.setChecked( true );
+        }
+
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+                R.array.skin, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sking.setAdapter(adapter2);
+        ArrayAdapter<CharSequence> adapter3= ArrayAdapter.createFromResource(this,
+                R.array.body, android.R.layout.simple_spinner_item);
+        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        body_type.setAdapter(adapter3);
+        for(int i=0;i<body_type.getCount();i++){
+            if(body_type.getItemAtPosition( i ).equals( Myarraylist.get( pos ).get( "body_type" ).toString( ) )){
+                body_type.setSelection( i );
+            }
+        }
+        for(int i=0;i<sking.getCount();i++){
+            if(sking.getItemAtPosition( i ).equals( Myarraylist.get( pos ).get( "skin_color" ).toString( ) )){
+                sking.setSelection( i );
+            }
+        }
+
+        date_of_suspect.setOnClickListener( new View.OnClickListener() {
+            @Override
+
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                final Calendar c = Calendar.getInstance();
+                mYear = 2000;
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dpd = new DatePickerDialog(manage_criminals.this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                date_of_suspect.setText(dayOfMonth + "-"
+                                        + (monthOfYear + 1) + "-" + year);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                dpd.show();
+
+            } });
+        date_of_suspect.setEnabled( false );
+        full_name.setEnabled( false );
+        male.setEnabled( false );
+        female.setEnabled( false );
+        sking.setEnabled( false );
+        height.setEnabled( false );
+        body_type.setEnabled( false );
+
+
+        dialogBuilder.setTitle("Suspect details");
+
+        dialogBuilder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //pass
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+
+    }
+
+
+
 
     void update(String url){
         RequestQueue queue = Volley.newRequestQueue(this);

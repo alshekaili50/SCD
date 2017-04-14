@@ -19,14 +19,13 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.journaldev.loginphpmysql.R;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class login extends BaseActivity{
+public class login extends BaseActivity {
 
     private int mMorphCounter1 = 1;
 
@@ -123,7 +122,7 @@ public class login extends BaseActivity{
                             new Timer().schedule(new TimerTask() {
                                 @Override
                                 public void run() {
-                                    Intent i = new Intent(login.this, main_menu.class);
+                                    Intent i = new Intent(login.this, navigation.class);
                                     startActivity(i);                                }
                             }, 250);
                         }
