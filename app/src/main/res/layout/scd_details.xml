@@ -11,33 +11,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
         <TextView
-            android:textSize="40dp"
+            android:textSize="25dp"
             android:textColor="@color/text_black_87"
             android:background="@drawable/border"
             android:id="@+id/avg_location"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            />
+            android:layout_marginTop="25dp"/>
         <TextView
             android:layout_centerHorizontal="true"
 
-            android:textSize="40dp"
+            android:textSize="25dp"
             android:textColor="@color/text_black_87"
             android:background="@drawable/border"
             android:id="@+id/avg_type"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/avg_location"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="25dp"/>
 
         <TextView
             android:layout_centerHorizontal="true"
 
-            android:textSize="40dp"
+            android:textSize="25dp"
             android:textColor="@color/text_black_87"
             android:background="@drawable/border"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="25dp"
             android:layout_below="@+id/avg_type"
             android:id="@+id/avg_weapon"
             android:layout_width="300dp"
@@ -46,51 +46,50 @@
         <TextView
             android:layout_centerHorizontal="true"
 
-            android:textSize="40dp"
+            android:textSize="25dp"
             android:textColor="@color/text_black_87"
             android:background="@drawable/border"
             android:id="@+id/avg_victims"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/avg_weapon"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="25dp"
             />
 
         <TextView
             android:layout_centerHorizontal="true"
-
-            android:textSize="40dp"
+            android:textSize="25dp"
             android:textColor="@color/text_black_87"
             android:background="@drawable/border"
             android:id="@+id/avg_evidences"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/avg_victims"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="25dp"
             />
         <TextView
             android:layout_centerHorizontal="true"
 
-            android:textSize="40dp"
+            android:textSize="25dp"
             android:textColor="@color/text_black_87"
             android:background="@drawable/border"
             android:id="@+id/avg_witness"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/avg_evidences"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="25dp"
             />
         <TextView
             android:layout_centerHorizontal="true"
 
-            android:textSize="40dp"
+            android:textSize="25dp"
             android:textColor="@color/text_black_87"
             android:background="@drawable/border"
             android:id="@+id/avg_overall"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/avg_witness"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="25dp"
             />
 
 

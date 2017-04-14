@@ -30,14 +30,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/case_id_detail"
-            android:layout_alignParentStart="true"/>
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:id="@+id/case_id_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/case_name_detail"
-         />
+            android:layout_marginTop="10dp"/>
+
 
         <TextView
             android:layout_below="@+id/case_time_detail"
@@ -45,37 +47,36 @@
             android:id="@+id/case_date_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            android:layout_marginTop="10dp"/>
         <TextView
 
             android:id="@+id/case_type_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/case_date_detail"
-            />
+            android:layout_marginTop="10dp"/>
         <TextView
             android:layout_below="@+id/case_type_detail"
 
             android:id="@+id/case_weapon_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-         />
+            android:layout_marginTop="10dp"/>
         <TextView
             android:id="@+id/case_name_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"/>
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"/>
         <TableLayout
             android:id="@+id/tableLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+
             android:layout_below="@+id/tableLayout1"
-            android:layout_marginTop="50dp"
-
-
-
-            >
+            android:layout_alignParentStart="true">
             <TableRow
                 android:background="@drawable/row_border"
                 android:id="@+id/victim_info"
@@ -99,10 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/case_weapon_detail"
-
-
-
-
+            android:layout_marginTop="10dp"
             >
             <TableRow
                 android:background="@drawable/row_border"
@@ -126,13 +124,10 @@
             android:id="@+id/tableLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+
             android:layout_below="@+id/tableLayout3"
-            android:layout_marginTop="50dp"
-
-
-
-
-            >
+            android:layout_alignParentStart="true">
             <TableRow
                 android:background="@drawable/row_border"
                 android:id="@+id/witness_info"
@@ -161,13 +156,10 @@
             android:id="@+id/tableLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+
             android:layout_below="@+id/tableLayout2"
-            android:layout_marginTop="50dp"
-
-
-
-
-            >
+            android:layout_alignParentStart="true">
             <TableRow
                 android:background="@drawable/row_border"
                 android:id="@+id/evidence_info"
