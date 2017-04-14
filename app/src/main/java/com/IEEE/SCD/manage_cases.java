@@ -65,6 +65,14 @@ public class manage_cases extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.manage_criminals);
+        // listView1
+        lisView1 = (ListView)findViewById(R.id.listView1);
+        lisView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                view.setBackgroundColor(0x0000FF00);
+            }
+        });
 
         // Permission StrictMode
         if (android.os.Build.VERSION.SDK_INT > 9) {
@@ -95,8 +103,6 @@ public class manage_cases extends AppCompatActivity {
 
     public void ShowData()
     {
-        // listView1
-         lisView1 = (ListView)findViewById(R.id.listView1);
 
         // keySearch
         EditText strKeySearch = (EditText)findViewById(R.id.txtKeySearch);

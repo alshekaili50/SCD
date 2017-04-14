@@ -37,6 +37,7 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
+import com.gordonwong.materialsheetfab.MaterialSheetFab;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -69,6 +70,9 @@ int PLACE_PICKER_REQUEST=1;
      MultiAutoCompleteTextView evidence1;
      Spinner spinner;
      Spinner weapon;
+    private MaterialSheetFab materialSheetFab;
+    private int statusBarColor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -77,7 +81,13 @@ int PLACE_PICKER_REQUEST=1;
         date = (EditText) findViewById( R.id.case_date );
         time = (EditText) findViewById( R.id.time );
         location = (EditText) findViewById( R.id.location );
-        add = (Button) findViewById( R.id.add_case );
+
+
+
+
+
+
+            add = (Button) findViewById( R.id.add_case );
         time.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -156,6 +166,9 @@ int PLACE_PICKER_REQUEST=1;
             }
         } );
     }
+
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
@@ -259,6 +272,8 @@ int PLACE_PICKER_REQUEST=1;
                         d.setOnClickListener( new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                Intent i = new Intent(add_case.this, manage_cases.class);
+                                startActivity(i);
                             }
                         } );
                         c.setOnClickListener( new View.OnClickListener() {
@@ -373,6 +388,16 @@ int PLACE_PICKER_REQUEST=1;
             }
         } );
         Button save = (Button) findViewById( R.id.Save );
+        Button cancel = (Button) findViewById( R.id.cancel_case );
+        cancel.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(add_case.this, manage_cases.class);
+                finish();
+                add_case.this.startActivity(myIntent);
+
+            }
+        } );
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource( this,
                 R.array.type_of_crimes, android.R.layout.simple_spinner_item );
 // Specify the layout to use when the list of choices appears
@@ -399,8 +424,12 @@ save.setOnClickListener( new View.OnClickListener() {
         String url = "http://scd.net23.net/insert_case.php?set=2&type="+type+"&weapon="+weapon+"&id="+a.getId();
         url = url.replaceAll(" ", "%20");
         insert_suspect_case( url );
-        Intent myIntent = new Intent(add_case.this, SCD.class);
-        myIntent.putExtra("key", a.getId()); //Optional parameters
+        String urlString="http://scd.net23.net/SCD.php?case_id="+a.getId();
+        Intent myIntent = new Intent(add_case.this, SCD_feed.class);
+        myIntent.putExtra("url", urlString); //Optional parameters
+        finish();  //Kill the activity from which you will go to next activity
+
+
         add_case.this.startActivity(myIntent);
 
 

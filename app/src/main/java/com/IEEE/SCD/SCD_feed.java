@@ -55,10 +55,16 @@ public class SCD_feed extends Activity {
 
                 try {
                     JSONArray data = new JSONArray(response);
-                    for (int i = 0; i < data.length(); i++) {
+                    if(data.length()==0){
+                        SCD_item dataSet = new SCD_item();
+                        dataSet.setName( "No suspects to show" );
+                        list.add( dataSet );
+                    }
+                    for (int i = 0,j=0; i < data.length()&&j<5; i++) {
 
                         JSONObject obj = data.getJSONObject(i);
                         SCD_item dataSet = new SCD_item();
+                        dataSet.setName(obj.getString("suspect_name"));
                         dataSet.setSuspect_id(obj.getString("suspect_id"));
                         dataSet.setCase_id(obj.getString("case_reference"));
                         dataSet.setAvg_evidence(obj.getString("avg_evidence"));
@@ -68,7 +74,19 @@ public class SCD_feed extends Activity {
                         dataSet.setAvg_weapon(obj.getString("avg_weapon"));
                         dataSet.setAvg_witness(obj.getString("avg_witness"));
                         dataSet.setOverall(obj.getString("overall_weight"));
-                        list.add(dataSet);
+                        double overall1=0;
+
+                        try {
+                            overall1 = Double.parseDouble( dataSet.getOverall());
+                        } catch(NumberFormatException nfe) {
+                            System.out.println("Could not parse " + nfe);
+                        }
+                        if(overall1<=0){
+                            continue;
+                        }
+                        else{
+                            j++;
+                        list.add(dataSet);}
                     } }catch (JSONException e) {
                     e.printStackTrace();
                 }

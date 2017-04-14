@@ -3,6 +3,7 @@ package com.IEEE.SCD;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -56,10 +58,12 @@ public class FeedSCDAdapter extends BaseAdapter {
             inflater = (LayoutInflater) activity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null)
-            convertView = inflater.inflate( R.layout.news_item, null);
-        TextView time = (TextView) convertView.findViewById(R.id.time_feed);
+            convertView = inflater.inflate( R.layout.scd_item, null);
+        TextView overall = (TextView) convertView.findViewById(R.id.overall);
         ImageView image=(ImageView)convertView.findViewById( R.id.thumbnail ) ;
         TextView header = (TextView) convertView.findViewById(R.id.count);
+
+
 
         //  TextView time = (TextView) convertView.findViewById(R.id.timestamp);
         TextView name = (TextView) convertView.findViewById(R.id.title);
@@ -72,9 +76,35 @@ public class FeedSCDAdapter extends BaseAdapter {
         source.setText("Wealth Source: " + String.valueOf(m.getSource()));
         worth.setText(String.valueOf(m.getWorth()));
         year.setText(String.valueOf(m.getYear()));
-*/
+*/      Log.d("pos",String.valueOf( position ));
         final SCD_item m = DataList.get(position);
-        name.setText(m.getSuspect_id());
+        name.setText(m.getName());
+        header.setText( m.getSuspect_id() );
+        double overall1=0;
+        try {
+            overall1 = Double.parseDouble(m.getOverall());
+        } catch(NumberFormatException nfe) {
+            System.out.println("Could not parse " + nfe);
+        }
+        overall1*=100;
+        overall.setText( new DecimalFormat("##.##").format(overall1)+"%" );
+
+        if(position==0){
+            image.setImageResource( R.drawable.ic_one );
+        }
+        if(position==1){
+            image.setImageResource( R.drawable.ic_004_two );
+        }
+        if(position==2){
+            image.setImageResource( R.drawable.ic_003_three );
+        }
+        if(position==3){
+            image.setImageResource( R.drawable.ic_002_four );
+        }
+        if(position==4){
+            image.setImageResource( R.drawable.ic_001_five );
+        }
+
 
    //     time.setText(m.getUploaded_date()+"  "+m.getUploaded_time()+" GMT");
       //  header.setText( "A new case has been added in "+m.getUploaded_date()+" " );

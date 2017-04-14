@@ -180,10 +180,6 @@ public class navigation extends AppCompatActivity
             Intent i = new Intent(navigation.this, manage_criminals.class);
             startActivity(i);
 
-        } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(navigation.this, news_feed.class);
-            startActivity(i);
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById( R.id.drawer_layout );

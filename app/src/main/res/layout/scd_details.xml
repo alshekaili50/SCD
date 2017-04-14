@@ -1,41 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/avg_location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/avg_type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="vertical"
+                    android:background="@color/colorPrimaryDark"
 
-    <TextView
-        android:id="@+id/avg_weapon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+        <TextView
+            android:textSize="40dp"
+            android:textColor="@color/mb_green_dark"
+            android:background="@drawable/border"
+            android:id="@+id/avg_location"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            />
+        <TextView
+            android:layout_centerHorizontal="true"
 
-    <TextView
-        android:id="@+id/avg_victims"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            android:textSize="40dp"
+            android:textColor="@color/mb_green_dark"
+            android:background="@drawable/border"
+            android:id="@+id/avg_type"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/avg_location"
+            android:layout_marginTop="50dp"/>
 
-    <TextView
-        android:id="@+id/avg_evidences"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/avg_witness"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/avg_overall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_centerHorizontal="true"
+
+            android:textSize="40dp"
+            android:textColor="@color/mb_green_dark"
+            android:background="@drawable/border"
+            android:layout_marginTop="50dp"
+            android:layout_below="@+id/avg_type"
+            android:id="@+id/avg_weapon"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_centerHorizontal="true"
+
+            android:textSize="40dp"
+            android:textColor="@color/mb_green_dark"
+            android:background="@drawable/border"
+            android:id="@+id/avg_victims"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/avg_weapon"
+            android:layout_marginTop="50dp"
+            />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+
+            android:textSize="40dp"
+            android:textColor="@color/mb_green_dark"
+            android:background="@drawable/border"
+            android:id="@+id/avg_evidences"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/avg_victims"
+            android:layout_marginTop="50dp"
+            />
+        <TextView
+            android:layout_centerHorizontal="true"
+
+            android:textSize="40dp"
+            android:textColor="@color/mb_green_dark"
+            android:background="@drawable/border"
+            android:id="@+id/avg_witness"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/avg_evidences"
+            android:layout_marginTop="50dp"
+            />
+        <TextView
+            android:layout_centerHorizontal="true"
+
+            android:textSize="40dp"
+            android:textColor="@color/mb_green_dark"
+            android:background="@drawable/border"
+            android:id="@+id/avg_overall"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/avg_witness"
+            android:layout_marginTop="50dp"
+            />
 
 
 
 
-</LinearLayout>
+    </RelativeLayout>
+</ScrollView>

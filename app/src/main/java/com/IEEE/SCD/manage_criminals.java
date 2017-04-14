@@ -65,6 +65,13 @@ LayoutInflater layout1;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manage_criminals);
          lisView1 = (ListView)findViewById(R.id.listView1);
+        lisView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                view.setBackgroundColor(0x0000FF00);
+            }
+        });
+
 
 
         ShowData();

@@ -77,5 +77,23 @@ public class SCD_item {
         this.overall = overall;
     }
 
-    String case_id,suspect_id,avg_location,avg_victims,avg_evidence,avg_type,avg_weapon,avg_witness,overall;
+    String case_id;
+    String suspect_id;
+    String avg_location;
+    String avg_victims;
+    String avg_evidence;
+    String avg_type;
+    String avg_weapon;
+    String avg_witness;
+    String overall;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    String name;
 }
